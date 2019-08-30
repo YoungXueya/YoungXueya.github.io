@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="YangXueya&#39;s blog">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      Leetcode solution | YangXueya
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    <script src="/js/qrious.js"></script>
+  
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>YangXueya</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>Leetcode solution</h2>
+  <p class="post-date">2019-08-30</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>I hope I can continue this practice to make me think about questions continuously!  Click the big <a href="https://github.com/YoungXueya/LeetcodeSolution" target="_blank" rel="noopener">Leetcode</a> to the project directly!</p>
+<h1 id="LeetcodeSolution"><a href="#LeetcodeSolution" class="headerlink" title="LeetcodeSolution"></a><a href="https://github.com/YoungXueya/LeetcodeSolution" target="_blank" rel="noopener">LeetcodeSolution</a></h1><table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Solution</th>
+<th>Tag</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="https://leetcode.com/problems/two-sum/" target="_blank" rel="noopener">1. Two Sum</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/TwoSum.java" target="_blank" rel="noopener">JAVA</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/add-two-numbers/" target="_blank" rel="noopener">2. Add Two numbers</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/2.%20Add%20two%20numbers" target="_blank" rel="noopener">JAVA</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/longest-substring-without-repeating-characters/" target="_blank" rel="noopener">3. Longest Substring Without Repeating Characters</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/3.%20Longest%20Substring%20Without%20Repeating%20Characters" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/median-of-two-sorted-arrays/" target="_blank" rel="noopener">4. Median of Two Sorted Arrays</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/4.%20Median%20of%20Two%20Sorted%20Arrays.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/longest-palindromic-substring/" target="_blank" rel="noopener">5. Longest Palindromic Substring</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/5.%20Longest%20Palindromic%20Substring.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/reverse-integer/" target="_blank" rel="noopener">7. Reverse Integer</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/7.%20Reverse%20Integer" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/palindrome-number/" target="_blank" rel="noopener">9. Palindrome Number</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/9.%20Palindrome%20Number.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/longest-common-prefix/" target="_blank" rel="noopener">14. Longest Common Prefix</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/14.%20Longest%20Common%20Prefix.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/3sum/" target="_blank" rel="noopener">15. Three Sum</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/ThreeSum.java" target="_blank" rel="noopener">JAVA</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/3sum-closest/" target="_blank" rel="noopener">16. 3Sum Closest</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/16.%203Sum%20Closest.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/4sum/" target="_blank" rel="noopener">18. Four sum</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/TwoSum.java" target="_blank" rel="noopener">JAVA</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/valid-parentheses/" target="_blank" rel="noopener">20. Valid Parentheses</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/20.%20Valid%20Parentheses.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/merge-two-sorted-lists/" target="_blank" rel="noopener">21. Merge Two Sorted Lists</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/21.%20Merge%20Two%20Sorted%20Lists" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/remove-duplicates-from-sorted-array/" target="_blank" rel="noopener">26. Remove Duplicates from Sorted Array</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/RemoveDuplicatesfromSortedArray.java" target="_blank" rel="noopener">JAVA</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/count-and-say/" target="_blank" rel="noopener">38. Count and Say</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/38.%20Count%20and%20Say.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/maximum-subarray/" target="_blank" rel="noopener">53. Maximum Subarray</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/53.%20Maximum%20Subarray.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/merge-intervals/" target="_blank" rel="noopener">56. Merge Intervals</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/56.%20Merge%20Intervals" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/length-of-last-word/" target="_blank" rel="noopener">58. Length of Last Word</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/58.%20Length%20of%20Last%20Word.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/rotate-list/" target="_blank" rel="noopener">61. Rotate List</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/61.%20Rotate%20List.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/unique-paths/" target="_blank" rel="noopener">62. Unique Paths</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/62.%20Unique%20Paths.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/unique-paths-ii/" target="_blank" rel="noopener">63. Unique Paths II</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/63.%20Unique%20Paths%20II.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/minimum-path-sum/" target="_blank" rel="noopener">64. Minimum Path Sum</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/64.%20Minimum%20Path%20Sum.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/plus-one/" target="_blank" rel="noopener">66. Plus One</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/66.%20Plus%20One.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/sqrtx/" target="_blank" rel="noopener">69. Sqrt(x)</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/69.%20Sqrt(x).py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/climbing-stairs/" target="_blank" rel="noopener">70. Climbing Stairs</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/70.%20Climbing%20Stairs.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/sort-colors/" target="_blank" rel="noopener">75. Sort Colors</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/75.%20Sort%20Colors" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/remove-duplicates-from-sorted-list/" target="_blank" rel="noopener">83. Remove Duplicates from Sorted List</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/83.%20Remove%20Duplicates%20from%20Sorted%20List.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/merge-sorted-array/" target="_blank" rel="noopener">88. Merge Sorted Array</a></td>
+<td><a href="https://leetcode.com/problems/merge-sorted-array/" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/decode-ways/" target="_blank" rel="noopener">91. Decode Ways</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/91.%20Decode%20Ways.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/binary-tree-inorder-traversal/" target="_blank" rel="noopener">94. Binary Tree Inorder Traversal</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/94.%20Binary%20Tree%20Inorder%20Traversal.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/unique-binary-search-trees/" target="_blank" rel="noopener">96. Unique Binary Search Trees</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/96.%20Unique%20Binary%20Search%20Trees.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/validate-binary-search-tree/" target="_blank" rel="noopener">98. Validate Binary Search Tree</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/98.%20Validate%20Binary%20Search%20Tree.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/same-tree/" target="_blank" rel="noopener">100. Same Tree</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/100.%20Same%20Tree.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/symmetric-tree/" target="_blank" rel="noopener">101. Symmetric Tree</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/101.%20Symmetric%20Tree.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/binary-tree-level-order-traversal/" target="_blank" rel="noopener">102. Binary Tree Level Order Traversal</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/102.%20Binary%20Tree%20Level%20Order%20Traversal.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/" target="_blank" rel="noopener">103. Binary Tree Zigzag Level Order Traversal</a>]</td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/103.%20Binary%20Tree%20Zigzag%20Level%20Order%20Traversal.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/maximum-depth-of-binary-tree/" target="_blank" rel="noopener">104. Maximum Depth of Binary Tree</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/104.%20Maximum%20Depth%20of%20Binary%20Tree.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/binary-tree-level-order-traversal-ii/" target="_blank" rel="noopener">107. Binary Tree Level Order Traversal II</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/107.%20Binary%20Tree%20Level%20Order%20Traversal%20II.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/" target="_blank" rel="noopener">108. Convert Sorted Array to Binary Search Tree</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/108.%20Convert%20Sorted%20Array%20to%20Binary%20Search%20Tree.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/balanced-binary-tree/" target="_blank" rel="noopener">110. Balanced Binary Tree</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/110.%20Balanced%20Binary%20Tree.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/minimum-depth-of-binary-tree/" target="_blank" rel="noopener">111. Minimum Depth of Binary Tree</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/111.%20Minimum%20Depth%20of%20Binary%20Tree.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/flatten-binary-tree-to-linked-list/" target="_blank" rel="noopener">114. Flatten Binary Tree to Linked List</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/114.%20Flatten%20Binary%20Tree%20to%20Linked%20List.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/pascals-triangle/" target="_blank" rel="noopener">118. Pascal’s Triangle</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/118.%20Pascal's%20Triangle.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/pascals-triangle-ii/" target="_blank" rel="noopener">119. Pascal’s Triangle II</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/119.%20Pascal's%20Triangle%20II.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td>120. Triangle](<a href="https://leetcode.com/problems/triangle/" target="_blank" rel="noopener">https://leetcode.com/problems/triangle/</a>)</td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/120.%20Triangle.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/" target="_blank" rel="noopener">121. Best Time to Buy and Sell Stock</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/121.%20Best%20Time%20to%20Buy%20and%20Sell%20Stock.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/" target="_blank" rel="noopener">122. Best Time to Buy and Sell Stock II</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/122.%20Best%20Time%20to%20Buy%20and%20Sell%20Stock%20II.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/valid-palindrome/" target="_blank" rel="noopener">125. Valid Palindrome</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/125.%20Valid%20Palindrome.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/single-number/" target="_blank" rel="noopener">136. Single Number</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/136.%20Single%20Number.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/linked-list-cycle/" target="_blank" rel="noopener">141. Linked List Cycle</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/141.%20Linked%20List%20Cycle.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/binary-tree-preorder-traversal/" target="_blank" rel="noopener">144. Binary Tree Preorder Traversal</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/144.%20Binary%20Tree%20Preorder%20Traversal.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/binary-tree-postorder-traversal/" target="_blank" rel="noopener">145. Binary Tree Postorder Traversal</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/145.%20Binary%20Tree%20Postorder%20Traversal.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/insertion-sort-list/" target="_blank" rel="noopener">147. Insertion Sort List</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/147.%20Insertion%20Sort%20List" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/sort-list/" target="_blank" rel="noopener">148. Sort List</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/148.%20Sort%20List" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/reverse-words-in-a-string/" target="_blank" rel="noopener">151. Reverse Words in a String</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/151.%20Reverse%20Words%20in%20a%20String.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/intersection-of-two-linked-lists/" target="_blank" rel="noopener">160. Intersection of Two Linked Lists</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/160.%20Intersection%20of%20Two%20Linked%20Lists.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/majority-element/" target="_blank" rel="noopener">169. Majority Element</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/169.%20Majority%20Element.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/excel-sheet-column-number/" target="_blank" rel="noopener">171. Excel Sheet Column Number</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/171.%20Excel%20Sheet%20Column%20Number.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/largest-number/" target="_blank" rel="noopener">179. Largest Number</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/179.%20Largest%20Number" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/rotate-array/" target="_blank" rel="noopener">189. Rotate Array</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/189.%20Rotate%20Array.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/house-robber/" target="_blank" rel="noopener">198. House Robber</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/198.%20House%20Robber.py" target="_blank" rel="noopener">Python</a></td>
+<td>Dynamic Programming</td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/number-of-islands/" target="_blank" rel="noopener">200. Number of Islands</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/200.%20Number%20of%20Islands.py" target="_blank" rel="noopener">Python</a></td>
+<td>Union Find</td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/happy-number/" target="_blank" rel="noopener">202. Happy Number</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/202.%20Happy%20Number.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/count-primes/" target="_blank" rel="noopener">204. Count Primes</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/204.%20Count%20Primes.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/isomorphic-strings/" target="_blank" rel="noopener">205. Isomorphic Strings</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/205.%20Isomorphic%20Strings.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/reverse-linked-list/" target="_blank" rel="noopener">206. Reverse Linked List</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/206.%20Reverse%20Linked%20List.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/house-robber-ii/" target="_blank" rel="noopener">213. House Robber II</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/213.%20House%20Robber%20II.py" target="_blank" rel="noopener">Python</a></td>
+<td>Dynamic Programming</td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/contains-duplicate/" target="_blank" rel="noopener">217. Contains Duplicate</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/217.%20Contains%20Duplicate" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/contains-duplicate-ii/submissions/" target="_blank" rel="noopener">219. Contains Duplicate II</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/219.%20Contains%20Duplicate%20II" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/invert-binary-tree/" target="_blank" rel="noopener">226. Invert Binary Tree</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/226.%20Invert%20Binary%20Tree.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/kth-smallest-element-in-a-bst/" target="_blank" rel="noopener">230. Kth Smallest Element in a BST</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/230.%20Kth%20Smallest%20Element%20in%20a%20BST.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/palindrome-linked-list/" target="_blank" rel="noopener">234. Palindrome Linked List</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/234.%20Palindrome%20Linked%20List.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/delete-node-in-a-linked-list/" target="_blank" rel="noopener">237. Delete Node in a Linked List</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/237.%20Delete%20Node%20in%20a%20Linked%20List.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/valid-anagram/" target="_blank" rel="noopener">242. Valid Anagram</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/242.%20Valid%20Anagram" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/missing-number/" target="_blank" rel="noopener">268. Missing Number</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/268.%20Missing%20Number.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/h-index/" target="_blank" rel="noopener">274. H-Index</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/perfect-squares/" target="_blank" rel="noopener">279. Perfect Squares</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/279.%20Perfect%20Squares.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/move-zeroes/" target="_blank" rel="noopener">283. Move Zeroes</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/283.%20Move%20Zeroes.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/find-the-duplicate-number/" target="_blank" rel="noopener">287. Find the Duplicate Number</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/287.%20Find%20the%20Duplicate%20Number.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/word-pattern/" target="_blank" rel="noopener">290. Word Pattern</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/290.%20Word%20Pattern.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/range-sum-query-immutable/" target="_blank" rel="noopener">303. Range Sum Query - Immutable</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/303.%20Range%20Sum%20Query%20-%20Immutable.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/coin-change/" target="_blank" rel="noopener">322. Coin Change</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/322.%20Coin%20Change.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/odd-even-linked-list/" target="_blank" rel="noopener">328. Odd Even Linked List</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/328.%20Odd%20Even%20Linked%20List.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/house-robber-iii/" target="_blank" rel="noopener">337. House Robber III</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/337.%20House%20Robber%20III.py" target="_blank" rel="noopener">Python</a></td>
+<td>Dynamic Programming</td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/counting-bits/" target="_blank" rel="noopener">338. Counting Bits</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/338.%20Counting%20Bits.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/intersection-of-two-arrays/" target="_blank" rel="noopener">349. Intersection of Two Arrays</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/349.%20Intersection%20of%20Two%20Arrays.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/intersection-of-two-arrays-ii/" target="_blank" rel="noopener">350. Intersection of Two Arrays II</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/350.%20Intersection%20of%20Two%20Arrays%20II" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/first-unique-character-in-a-string/" target="_blank" rel="noopener">387. First Unique Character in a String</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/387.%20First%20Unique%20Character%20in%20a%20String.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/is-subsequence/" target="_blank" rel="noopener">392. Is Subsequence</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/392.%20Is%20Subsequence.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/longest-palindrome/" target="_blank" rel="noopener">409. Longest Palindrome</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/409.%20Longest%20Palindrome.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/arithmetic-slices/" target="_blank" rel="noopener">413. Arithmetic Slices</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/413.%20Arithmetic%20Slices.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/add-strings/" target="_blank" rel="noopener">415. Add Strings</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/415.%20Add%20Strings.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/island-perimeter/" target="_blank" rel="noopener">463. Island Perimeter</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/5.%20Longest%20Palindromic%20Substring.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/set-mismatch/" target="_blank" rel="noopener">645. Set Mismatch</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/645.%20Set%20Mismatch.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/min-cost-climbing-stairs/" target="_blank" rel="noopener">746. Min Cost Climbing Stairs</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/746.%20Min%20Cost%20Climbing%20Stairs.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/largest-number-at-least-twice-of-others/" target="_blank" rel="noopener">747. Largest Number At Least Twice of Others</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/747.%20Largest%20Number%20At%20Least%20Twice%20of%20Others.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/rotated-digits/" target="_blank" rel="noopener">788. Rotated Digits</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/788.%20Rotated%20Digits.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/maximize-distance-to-closest-person/" target="_blank" rel="noopener">849. Maximize Distance to Closest Person</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/849.%20Maximize%20Distance%20to%20Closest%20Person.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/stone-game/" target="_blank" rel="noopener">877. Stone Game</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/877.%20Stone%20Game.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/sort-array-by-parity-ii/" target="_blank" rel="noopener">922. Sort Array By Parity II</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/922.%20Sort%20Array%20By%20Parity%20II.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/minimum-falling-path-sum/" target="_blank" rel="noopener">931. Minimum Falling Path Sum</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/931.%20Minimum%20Falling%20Path%20Sum.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/prison-cells-after-n-days/" target="_blank" rel="noopener">957. Prison Cells After N Days</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/957.%20Prison%20Cells%20After%20N%20Days.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/k-closest-points-to-origin/" target="_blank" rel="noopener">973. K Closest Points to Origin</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/973.%20K%20Closest%20Points%20to%20Origin.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/largest-perimeter-triangle/" target="_blank" rel="noopener">976. Largest Perimeter Triangle</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/976.%20Largest%20Perimeter%20Triangle" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/partition-array-into-three-parts-with-equal-sum/" target="_blank" rel="noopener">1013. Partition Array Into Three Parts With Equal Sum</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/1013.%20Partition%20Array%20Into%20Three%20Parts%20With%20Equal%20Sum.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/divisor-game/" target="_blank" rel="noopener">1025. Divisor Game</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/tree/master/src" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/two-city-scheduling/" target="_blank" rel="noopener">1029. Two City Scheduling</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/1029.%20Two%20City%20Scheduling.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/matrix-cells-in-distance-order/" target="_blank" rel="noopener">1030. Matrix Cells in Distance Order</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/1030.%20Matrix%20Cells%20in%20Distance%20Order" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://leetcode.com/problems/longest-common-subsequence/" target="_blank" rel="noopener">1143. Longest Common Subsequence</a></td>
+<td><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/1143.%20Longest%20Common%20Subsequence.py" target="_blank" rel="noopener">Python</a></td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id="Mysql-Questions"><a href="#Mysql-Questions" class="headerlink" title="Mysql Questions"></a><a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/All%20SQL%20Problems.md" target="_blank" rel="noopener">Mysql Questions</a></h1></section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#Leetcode" >
+    <span class="tag-code">Leetcode</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/08/29/MerrillLynch/">
+        <span class="nav-arrow">← </span>
+        
+          Preparation for Bank of America Merrill Lynch
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+      <div class="money-like">
+        <div class="reward-btn">
+          赏
+          <span class="money-code">
+            <span class="alipay-code">
+              <div class="code-image"></div>
+              <b>使用支付宝打赏</b>
+            </span>
+            <span class="wechat-code">
+              <div class="code-image"></div>
+              <b>使用微信打赏</b>
+            </span>
+          </span>
+        </div>
+        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
+      </div>
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#LeetcodeSolution"><span class="toc-nav-text">LeetcodeSolution</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#Mysql-Questions"><span class="toc-nav-text">Mysql Questions</span></a></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://yoursite.com/2019/08/30/Leetcode/';
+    var banner = 'https://wallpapertag.com/wallpaper/full/c/8/d/272932-new-minimalist-wallpaper-2560x1600-screen.jpg'
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>

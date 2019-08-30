@@ -3,7 +3,7 @@
   <head><meta name="generator" content="Hexo 3.9.0">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-  <meta name="description" content="yanm1ng&#39;s blog">
+  <meta name="description" content="YangXueya&#39;s blog">
   <meta name="keyword" content="hexo-theme, vuejs">
   
     <link rel="shortcut icon" href="/css/images/logo.png">
@@ -21,6 +21,8 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    <script src="/js/qrious.js"></script>
   
   
   
@@ -179,13 +181,42 @@
       </a>
     
     
+      <a class="nav-right" href="/2019/08/30/Leetcode/">
+        
+          Leetcode solution
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
   </div>
 
     <!-- NAV END -->
     <!-- 打赏 START -->
     
+      <div class="money-like">
+        <div class="reward-btn">
+          赏
+          <span class="money-code">
+            <span class="alipay-code">
+              <div class="code-image"></div>
+              <b>使用支付宝打赏</b>
+            </span>
+            <span class="wechat-code">
+              <div class="code-image"></div>
+              <b>使用微信打赏</b>
+            </span>
+          </span>
+        </div>
+        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
+      </div>
+    
     <!-- 打赏 END -->
     <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
     
     <!-- 二维码 END -->
     
@@ -210,7 +241,7 @@
 <script>
   (function () {
     var url = 'http://yoursite.com/2019/08/29/MerrillLynch/';
-    var banner = 'https://cdn.inspirationhut.net/wp-content/uploads/2014/08/1221.jpg'
+    var banner = 'http://www.icanbecreative.com/res/2012/11/minimalistic-artwork-fusion-zometool.jpg'
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
         'background-image': 'url(' + banner + ')'
@@ -257,6 +288,13 @@
   })();
 </script>
 
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
 
 
 

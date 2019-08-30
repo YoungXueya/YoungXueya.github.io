@@ -3,7 +3,7 @@
   <head><meta name="generator" content="Hexo 3.9.0">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-  <meta name="description" content="yanm1ng&#39;s blog">
+  <meta name="description" content="YangXueya&#39;s blog">
   <meta name="keyword" content="hexo-theme, vuejs">
   
     <link rel="shortcut icon" href="/css/images/logo.png">
@@ -21,6 +21,8 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    <script src="/js/qrious.js"></script>
   
   
   
@@ -148,7 +150,24 @@
   <!-- Article START -->
   <article class="post-article">
     <section class="markdown-content"><p>I will list the frequently asked questions and give answers recommended by  Youtubers.</p>
-<h3 id="1-Why-do-you-want-to-work-in-my-company"><a href="#1-Why-do-you-want-to-work-in-my-company" class="headerlink" title="1. Why do you want to work in my company?"></a>1. Why do you want to work in my company?</h3><ul>
+<h3 id="1-Tell-me-Something-about-yourself"><a href="#1-Tell-me-Something-about-yourself" class="headerlink" title="1. Tell me Something about yourself"></a>1. Tell me Something about yourself</h3><ul>
+<li><p><strong>Interpretation:</strong> To see your confidence, To see how you express yourself and how is your body language.</p>
+</li>
+<li><p><strong>Hinnts:</strong> </p>
+<ul>
+<li><strong>Name:</strong> My name is Yang Xueya(Don’t say it if mentioned)</li>
+<li><strong>Place:</strong> I come from Mainland China.</li>
+<li><strong>Highest Qualification:</strong> I have recently graduated from University of Hong Kong.</li>
+<li><strong>Skills and Experience:</strong></li>
+<li><strong>Goals：</strong> </li>
+<li><strong>Ending:</strong> That is all about me. Thanks for giving me the wonderful chance.</li>
+</ul>
+</li>
+<li><p><strong>Sample Answer:</strong> Thank you very much for giving this oppotunity to introduce myself. My name is Yang Xueya.  I belong to Mainland China. I am a recent computer  science post graduate from University of Hong Kong. When I was in the College, I had made up my mind to become a software engineer. I have studied the courses of programming, database and project management. I also applied what I have learn in a few projects. Currently,  I  want to settle in a good organization where I can get a good platform to be a professional software developer. I have heard about XX for years. I always admire XX’s execellence for your professional services and insights.  I believe XX would be the perfect enviorment for my future career.</p>
+<p>That is all about me. Thanks for giving me the wonderful chance to introduce myself.</p>
+</li>
+</ul>
+<h3 id="2-Why-do-you-want-to-work-in-my-company"><a href="#2-Why-do-you-want-to-work-in-my-company" class="headerlink" title="2. Why do you want to work in my company?"></a>2. Why do you want to work in my company?</h3><ul>
 <li><strong>Interpretation:</strong> What is important to you about this company? Will you leave for a better offer?  Say something praise to the interviewer.</li>
 <li><strong>Prepare:</strong> Research the company before attend the interview. Know something about the past, present and future of the company.</li>
 <li><strong>Sample Answer:</strong> I have always wanted to work for excellent corporate because I always admired what they do.  Google is a great company which encourage creation and innovation. This could promoted me after I worked in this company. Therefore, it is always my  dread job.</li>
@@ -191,8 +210,30 @@
     <!-- NAV END -->
     <!-- 打赏 START -->
     
+      <div class="money-like">
+        <div class="reward-btn">
+          赏
+          <span class="money-code">
+            <span class="alipay-code">
+              <div class="code-image"></div>
+              <b>使用支付宝打赏</b>
+            </span>
+            <span class="wechat-code">
+              <div class="code-image"></div>
+              <b>使用微信打赏</b>
+            </span>
+          </span>
+        </div>
+        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
+      </div>
+    
     <!-- 打赏 END -->
     <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
     
     <!-- 二维码 END -->
     
@@ -206,7 +247,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-Why-do-you-want-to-work-in-my-company"><span class="toc-nav-text">1. Why do you want to work in my company?</span></a></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-Tell-me-Something-about-yourself"><span class="toc-nav-text">1. Tell me Something about yourself</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-Why-do-you-want-to-work-in-my-company"><span class="toc-nav-text">2. Why do you want to work in my company?</span></a></li></ol>
     
   </div>
 </aside>
@@ -264,6 +305,13 @@
   })();
 </script>
 
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
 
 
 
