@@ -10,7 +10,7 @@
   
   <title>
     
-      Common Interview Questions | YangXueya
+      Basic Knowledge of Spark | YangXueya
     
   </title>
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -140,8 +140,8 @@
 </header>
 
     <div id="article-banner">
-  <h2>Common Interview Questions</h2>
-  <p class="post-date">2019-08-29</p>
+  <h2>Basic Knowledge of Spark</h2>
+  <p class="post-date">2019-08-01</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -149,48 +149,91 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><p>I will list the frequently asked questions and give answers recommended by  Youtubers.</p>
-<h3 id="1-Tell-me-Something-about-yourself"><a href="#1-Tell-me-Something-about-yourself" class="headerlink" title="1. Tell me Something about yourself"></a>1. Tell me Something about yourself</h3><ul>
-<li><p><strong>Interpretation:</strong> To see your confidence, To see how you express yourself and how is your body language.</p>
-</li>
-<li><p><strong>Hinnts:</strong> </p>
+    <section class="markdown-content"><h5 id="1-Spark’s-build-in-libraries"><a href="#1-Spark’s-build-in-libraries" class="headerlink" title="1. Spark’s build-in libraries:"></a>1. Spark’s build-in libraries:</h5><ul>
+<li>Spark SQL: DataFrames-based      structured and semi-structured data processing</li>
+<li>Spark Streaming: Streaming analytics</li>
+<li>Spark GraphX: graph processing(page rank)</li>
+<li>Spark MLlib: machine learning</li>
+</ul>
+<h5 id="2-Why-Spark"><a href="#2-Why-Spark" class="headerlink" title="2. Why Spark?"></a><strong>2. Why Spark?</strong></h5><p>1) Hadoop MapReduce supports batch processing only, not suitable for：</p>
 <ul>
-<li><strong>Name:</strong> My name is Yang Xueya(Don’t say it if mentioned)</li>
-<li><strong>Place:</strong> I come from Mainland China.</li>
-<li><strong>Highest Qualification:</strong> I have recently graduated from University of Hong Kong.</li>
-<li><strong>Skills and Experience:</strong></li>
-<li><strong>Goals：</strong> </li>
-<li><strong>Ending:</strong> That is all about me. Thanks for giving me the wonderful chance.</li>
+<li>Iterative application, need to run the same mapper and reducer multiple times(training model in machine learning).</li>
+<li>Interactive application: Web application for interactive queries</li>
+<li>Streaming applications: infinitive data stream</li>
+<li>Map Reduce supports batch processing only</li>
 </ul>
+<p>2) Advantages of spark</p>
+<ul>
+<li>In-memory cache(RDD) and In-memory Computing makes process fast.</li>
+<li>Can handle interactive, iterative  and streaming input application.</li>
+</ul>
+<h3 id="Resilient-Distributed-datasets-RDD"><a href="#Resilient-Distributed-datasets-RDD" class="headerlink" title="Resilient Distributed datasets(RDD)"></a><strong>Resilient Distributed datasets(RDD)</strong></h3><ul>
+<li>A distributed data structure.</li>
+<li>Logically partitioned across many nodes</li>
+</ul>
+<h5 id="3-Transformation-and-Actions"><a href="#3-Transformation-and-Actions" class="headerlink" title="3. Transformation and Actions:"></a><strong>3. Transformation and Actions:</strong></h5><ul>
+<li><p><strong>Transformation:</strong> apply some function on an RDD and creates a new RDD. Example: Map, Filter, flatMap, Union, groupBY, reduceByKey, sortByKey, join</p>
 </li>
-<li><p><strong>Sample Answer:</strong> Thank you very much for giving this oppotunity to introduce myself. My name is Yang Xueya.  I belong to Mainland China. I am a recent computer  science post graduate from University of Hong Kong. When I was in the College, I had made up my mind to become a software engineer. I have studied the courses of programming, database and project management. I also applied what I have learn in a few projects. Currently,  I  want to settle in a good organization where I can get a good platform to be a professional software developer. I have heard about XX for years. I always admire XX’s execellence for your professional services and insights.  I believe XX would be the perfect enviorment for my future career. Therefore, I want to be a part of XX </p>
-<p>That is all about me. Thanks for giving me the wonderful chance to introduce myself.</p>
+<li><p>Example: Map, Filter, flatMap, Union, groupBY, reduceByKey, sortByKey, join</p>
+</li>
+<li><p><strong>Action:</strong> Save result or display it via driver program. Example: reduce, collect, count, take, saveAsTextFile, saveAsObjectFile,foreach.</p>
 </li>
 </ul>
-<h3 id="2-Why-do-you-want-to-work-in-my-company"><a href="#2-Why-do-you-want-to-work-in-my-company" class="headerlink" title="2. Why do you want to work in my company?"></a>2. Why do you want to work in my company?</h3><ul>
-<li><strong>Interpretation:</strong> What is important to you about this company? Will you leave for a better offer?  Say something praise to the interviewer.</li>
-<li><strong>Prepare:</strong> Research the company before attend the interview. Know something about the past, present and future of the company.</li>
-<li><strong>Sample Answer:</strong> I have always wanted to work for excellent corporate because I always admired what they do.  Google is a great company which encourage creation and innovation. This could promoted me after I worked in this company. Therefore, it is always my  dread job.</li>
+<ul>
+<li>RDD is only computed when an Action requires a result to be returned to the driver program.</li>
 </ul>
-<h3 id="3-What-is-your-greatest-accomplishment"><a href="#3-What-is-your-greatest-accomplishment" class="headerlink" title="3. What is your greatest accomplishment?"></a>3. What is your greatest accomplishment?</h3><ul>
-<li><strong>Interpretation:</strong> 1. Recent accomplishment 2. STAR: Situation, Task, Action, Result. 3. About the career. 4. What is the benefit you get from.  </li>
-<li><strong>Sample Answer:</strong>  I was the topper among my classmates during my undergraduate  and my university awarded me scholarship multiple times for my good performance.  And this also brings me to University of Hong Kong, where I get further education with excellent professors and students. That’s my biggest achievement of my life till now but I believe there are more to come in my near future.</li>
+<h5 id="4-Two-types-of-transformation"><a href="#4-Two-types-of-transformation" class="headerlink" title="4. Two types of transformation:"></a><strong>4. Two types of transformation:</strong></h5><ul>
+<li><strong>Narrow transformation:</strong> map, union, filter, flatMap</li>
+<li><strong>Wide transformation:</strong> multiple child partitions may depends on one parent. Join, groupByKey,      SortedByKey, ReduceByKey</li>
+<li>Wide transformation requires shuffle.</li>
 </ul>
-<h3 id="4-Are-you-a-team-player"><a href="#4-Are-you-a-team-player" class="headerlink" title="4. Are you a team player?"></a>4. Are you a team player?</h3><ul>
-<li><strong>Interpretation:</strong>  Add a strong example to show that you are really a team player. Add some skills which a team player show. Ex: flexible, good listener</li>
-<li><strong>Sample Answer:</strong> Yes I am very much a team player. In fact, there are many opportunities during my school to build up my skills as a team player. For example, in my recent project,  I worked with a lady to finish our graduation project.  We are complementary and we learned a lot from each other. When meeting conflicts, we will do some survey to backup our opinion and the one with stronger proof will persuade the other. Finally, we finished the project on time and with good result</li>
+<ol>
+<li><strong>Spark is lazy</strong></li>
+</ol>
+<ul>
+<li>Don’t compute until it gets      to the first action</li>
+<li>More efficient,      transformation get bundled together and only run on demand, gaining      opportunities for optimization</li>
 </ul>
-<h3 id="5-time-you-take-initiative-and-push-yourself-over-requirement"><a href="#5-time-you-take-initiative-and-push-yourself-over-requirement" class="headerlink" title="5.time you take initiative and push yourself over requirement"></a>5.time you take initiative and push yourself over requirement</h3></section>
+<ol>
+<li><strong>Spark Internal</strong></li>
+</ol>
+<ul>
+<li>An RDD contains a list of      partitions</li>
+<li>Function to compute</li>
+<li>List of parent RDD,      type(wide/narrow)</li>
+<li>A partition schema(      hash-partitioned)</li>
+<li>A computation placement hint</li>
+</ul>
+<ol>
+<li><strong>RDD Cache</strong></li>
+</ol>
+<ul>
+<li>Be used multiple times.</li>
+<li>myRDD.cache(),      SparkContext.getRDDStorageInfo()</li>
+<li>Just a hint, not      guarantee:  fraction storage, evict      least recently used RDD</li>
+<li>An RDD once consumed, its      garbage-collected.</li>
+<li>Cache commands indicates,      cached next time its loaded into memory</li>
+</ul>
+<ol>
+<li><strong>RDD persist:</strong> save the intermediate result so that we can reuse it if      required</li>
+</ol>
+<ul>
+<li>Memory_only-&gt;CPU-efficient,      once memory full, cached RDD will be removed an need to be recompute.      Cache. Space efficient </li>
+<li>Memory_and_Disk:      store RDD as deserialized Java object in JVM, if not fit in memory, store      partitions on disk</li>
+<li>Memory_ONLY_SER:      space-efficient, but more CPU-intensive to read</li>
+<li>Disk only: store the RDD      partitions only on disk.</li>
+<li>Memory_only_2: same as the      levels above, but replica two times. Fast fault recovery.</li>
+</ul>
+<ol>
+<li>Serialization</li>
+</ol>
+<ul>
+<li>Java serialization: flexible      but slow</li>
+<li>Kryo serialization: faster      and more compact(used internally for shuffling RDDs)</li>
+</ul>
+<p><img src="file:///D:/UserData/TEMP/msohtmlclip1/01/clip_image001.png" alt="Serialization  (need CPU time)  OBÆCT STREAM OF BYTES  Deserialization  (need CPU time)  BYTES "></p>
+</section>
     <!-- Tags START -->
-    
-      <div class="tags">
-        <span>Tags:</span>
-        
-  <a href="/tags#Interview" >
-    <span class="tag-code">Interview</span>
-  </a>
-
-      </div>
     
     <!-- Tags END -->
     <!-- NAV START -->
@@ -198,17 +241,10 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2019/08/29/hello-world/">
-        <span class="nav-arrow">← </span>
+    
+      <a class="nav-right" href="/2019/08/29/hello-world/">
         
           Hello World
-        
-      </a>
-    
-    
-      <a class="nav-right" href="/2019/08/29/MerrillLynch/">
-        
-          Preparation for Bank of America Merrill Lynch
         
         <span class="nav-arrow"> →</span>
       </a>
@@ -238,7 +274,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-Tell-me-Something-about-yourself"><span class="toc-nav-text">1. Tell me Something about yourself</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-Why-do-you-want-to-work-in-my-company"><span class="toc-nav-text">2. Why do you want to work in my company?</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-What-is-your-greatest-accomplishment"><span class="toc-nav-text">3. What is your greatest accomplishment?</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#4-Are-you-a-team-player"><span class="toc-nav-text">4. Are you a team player?</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#5-time-you-take-initiative-and-push-yourself-over-requirement"><span class="toc-nav-text">5.time you take initiative and push yourself over requirement</span></a></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#1-Spark’s-build-in-libraries"><span class="toc-nav-text">1. Spark’s build-in libraries:</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#2-Why-Spark"><span class="toc-nav-text">2. Why Spark?</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Resilient-Distributed-datasets-RDD"><span class="toc-nav-text">Resilient Distributed datasets(RDD)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#3-Transformation-and-Actions"><span class="toc-nav-text">3. Transformation and Actions:</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#4-Two-types-of-transformation"><span class="toc-nav-text">4. Two types of transformation:</span></a></li></ol>
     
   </div>
 </aside>
@@ -248,8 +284,8 @@
 
 <script>
   (function () {
-    var url = 'http://yoursite.com/2019/08/29/questions/';
-    var banner = 'https://wallpaperscute.com/wp-content/uploads/2018/05/Wallpaper-Black-and-Yellow-Desktop.jpg'
+    var url = 'http://yoursite.com/2019/08/01/Spark/';
+    var banner = 'https://66.media.tumblr.com/976ff26c655b6bd8ee69fb43e2ed81ba/tumblr_nsvu9eWJUW1t7cmmpo1_1280.png'
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
         'background-image': 'url(' + banner + ')'
