@@ -10,7 +10,7 @@
   
   <title>
     
-      Common Interview Questions | YangXueya
+      Spark Streaming | YangXueya
     
   </title>
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -140,8 +140,8 @@
 </header>
 
     <div id="article-banner">
-  <h2>Common Interview Questions</h2>
-  <p class="post-date">2019-08-29</p>
+  <h2>Spark Streaming</h2>
+  <p class="post-date">2019-09-02</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -149,45 +149,33 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><p>I will list the frequently asked questions and give answers recommended by  Youtubers.</p>
-<h3 id="1-Tell-me-Something-about-yourself"><a href="#1-Tell-me-Something-about-yourself" class="headerlink" title="1. Tell me Something about yourself"></a>1. Tell me Something about yourself</h3><ul>
-<li><p><strong>Interpretation:</strong> To see your confidence, To see how you express yourself and how is your body language.</p>
+    <section class="markdown-content"><h3 id="Spark-Streaming"><a href="#Spark-Streaming" class="headerlink" title="Spark Streaming"></a>Spark Streaming</h3><h5 id="1-Input-of-Spark-Streaming-application"><a href="#1-Input-of-Spark-Streaming-application" class="headerlink" title="1. Input of Spark Streaming application."></a>1. Input of Spark Streaming application.</h5><p>Spark Streaming takes input data stream from Kafka, Apache Flume, Amazon Kinesis, Twitter or TCP sockets.</p>
+<p>Spark Dstream represents a stream of data divided into small batches. Internally, a Dstream is a represented as a sequence of RDDs.</p>
+<p><img src="/2019/09/02/SparkStreaming/Batch.png" alt="Batch"></p>
+<h5 id="2-Spark-Streaming-mechanism"><a href="#2-Spark-Streaming-mechanism" class="headerlink" title="2. Spark Streaming mechanism"></a>2. Spark Streaming mechanism</h5><p>Spark Streaming receives live input data, divided input data into batches, which then processed by the Spark engine to generate the final stream of result in batches. </p>
+<p><img src="/2019/09/02/SparkStreaming/Streaming.png" alt="Spark Streaming"></p>
+<p>In Receiver mode</p>
+<p>1) KafkaReceiver (a long task running on a executor ) divides input stream into blocks and keeps in memory. Using blockManager to store data in executors. Report blockID to ReceiverTacker in Driver.</p>
+<p>2). ReceiverTracker transform received data into RDD according to BlockID.  Block=&gt;RDD.</p>
+<p>3) Spark Streaming start a job for each RDD, job executed by spark engine.</p>
+<p>4) Task Scheduler of Spark engine schedules tasks to each executor. RDD partition =&gt; task.</p>
+<h5 id="3-Spark-Streaming-Configuration"><a href="#3-Spark-Streaming-Configuration" class="headerlink" title="3. Spark Streaming Configuration"></a>3. Spark Streaming Configuration</h5><ul>
+<li><p>spark.streaming.batchInterval: Interval that received RDD will be divided into batches. Usually 2s.</p>
 </li>
-<li><p><strong>Hinnts:</strong> </p>
-<ul>
-<li><strong>Name:</strong> My name is Yang Xueya(Don’t say it if mentioned)</li>
-<li><strong>Place:</strong> I come from Mainland China.</li>
-<li><strong>Highest Qualification:</strong> I have recently graduated from University of Hong Kong.</li>
-<li><strong>Skills and Experience:</strong></li>
-<li><strong>Goals：</strong> </li>
-<li><strong>Ending:</strong> That is all about me. Thanks for giving me the wonderful chance.</li>
-</ul>
+<li><p>spark.streaming.blockInterval :  Interval at which data received by Spark Streaming receivers is chunked into blocks of data before storing them in Spark. Default 200ms, minimum recommended 50ms.</p>
+<p><img src="/2019/09/02/SparkStreaming/Block.png" alt="Block"></p>
 </li>
-<li><p><strong>Sample Answer:</strong> Thank you very much for giving this oppotunity to introduce myself. My name is Yang Xueya.  I belong to Mainland China. I am a recent computer  science post graduate from University of Hong Kong. When I was in the College, I had made up my mind to become a software engineer. I have studied the courses of programming, database and project management. I also applied what I have learn in a few projects. Currently,  I  want to settle in a good organization where I can get a good platform to be a professional software developer. I have heard about XX for years. I always admire XX’s execellence for your professional services and insights.  I believe XX would be the perfect enviorment for my future career. Therefore, I want to be a part of XX </p>
-<p>That is all about me. Thanks for giving me the wonderful chance to introduce myself.</p>
+<li><p>spark.streaming.unpersist: Force RDDs generated and persisted by Spark Streaming to be automatically unpersisted from Spark’s memory(If true). This would cause RDD not found problem.</p>
 </li>
 </ul>
-<h3 id="2-Why-do-you-want-to-work-in-my-company"><a href="#2-Why-do-you-want-to-work-in-my-company" class="headerlink" title="2. Why do you want to work in my company?"></a>2. Why do you want to work in my company?</h3><ul>
-<li><strong>Interpretation:</strong> What is important to you about this company? Will you leave for a better offer?  Say something praise to the interviewer.</li>
-<li><strong>Prepare:</strong> Research the company before attend the interview. Know something about the past, present and future of the company.</li>
-<li><strong>Sample Answer:</strong> I have always wanted to work for excellent corporate because I always admired what they do.  Google is a great company which encourage creation and innovation. This could promoted me after I worked in this company. Therefore, it is always my  dread job.</li>
-</ul>
-<h3 id="3-What-is-your-greatest-accomplishment"><a href="#3-What-is-your-greatest-accomplishment" class="headerlink" title="3. What is your greatest accomplishment?"></a>3. What is your greatest accomplishment?</h3><ul>
-<li><strong>Interpretation:</strong> 1. Recent accomplishment 2. STAR: Situation, Task, Action, Result. 3. About the career. 4. What is the benefit you get from.  </li>
-<li><strong>Sample Answer:</strong>  I was the topper among my classmates during my undergraduate  and my university awarded me scholarship multiple times for my good performance.  And this also brings me to University of Hong Kong, where I get further education with excellent professors and students. That’s my biggest achievement of my life till now but I believe there are more to come in my near future.</li>
-</ul>
-<h3 id="4-Are-you-a-team-player"><a href="#4-Are-you-a-team-player" class="headerlink" title="4. Are you a team player?"></a>4. Are you a team player?</h3><ul>
-<li><strong>Interpretation:</strong>  Add a strong example to show that you are really a team player. Add some skills which a team player show. Ex: flexible, good listener</li>
-<li><strong>Sample Answer:</strong> Yes I am very much a team player. In fact, there are many opportunities during my school to build up my skills as a team player. For example, in my recent project,  I worked with a lady to finish our graduation project.  We are complementary and we learned a lot from each other. When meeting conflicts, we will do some survey to backup our opinion and the one with stronger proof will persuade the other. Finally, we finished the project on time and with good result</li>
-</ul>
-<h3 id="5-time-you-take-initiative-and-push-yourself-over-requirement"><a href="#5-time-you-take-initiative-and-push-yourself-over-requirement" class="headerlink" title="5.time you take initiative and push yourself over requirement"></a>5.time you take initiative and push yourself over requirement</h3></section>
+</section>
     <!-- Tags START -->
     
       <div class="tags">
         <span>Tags:</span>
         
-  <a href="/tags#Interview" >
-    <span class="tag-code">Interview</span>
+  <a href="/tags#Cloud Computing" >
+    <span class="tag-code">Cloud Computing</span>
   </a>
 
       </div>
@@ -198,20 +186,13 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2019/08/29/hello-world/">
+      <a class="nav-left" href="/2019/09/01/DBMS/">
         <span class="nav-arrow">← </span>
         
-          Hello World
+          Database Management System
         
       </a>
     
-    
-      <a class="nav-right" href="/2019/08/29/MerrillLynch/">
-        
-          Preparation for Bank of America Merrill Lynch
-        
-        <span class="nav-arrow"> →</span>
-      </a>
     
   </div>
 
@@ -238,7 +219,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-Tell-me-Something-about-yourself"><span class="toc-nav-text">1. Tell me Something about yourself</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-Why-do-you-want-to-work-in-my-company"><span class="toc-nav-text">2. Why do you want to work in my company?</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-What-is-your-greatest-accomplishment"><span class="toc-nav-text">3. What is your greatest accomplishment?</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#4-Are-you-a-team-player"><span class="toc-nav-text">4. Are you a team player?</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#5-time-you-take-initiative-and-push-yourself-over-requirement"><span class="toc-nav-text">5.time you take initiative and push yourself over requirement</span></a></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Spark-Streaming"><span class="toc-nav-text">Spark Streaming</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#1-Input-of-Spark-Streaming-application"><span class="toc-nav-text">1. Input of Spark Streaming application.</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#2-Spark-Streaming-mechanism"><span class="toc-nav-text">2. Spark Streaming mechanism</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#3-Spark-Streaming-Configuration"><span class="toc-nav-text">3. Spark Streaming Configuration</span></a></li></ol></li></ol></li></ol>
     
   </div>
 </aside>
@@ -248,8 +229,8 @@
 
 <script>
   (function () {
-    var url = 'http://yoursite.com/2019/08/29/questions/';
-    var banner = 'https://wallpaperscute.com/wp-content/uploads/2018/05/Wallpaper-Black-and-Yellow-Desktop.jpg'
+    var url = 'http://yoursite.com/2019/09/02/SparkStreaming/';
+    var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
         'background-image': 'url(' + banner + ')'

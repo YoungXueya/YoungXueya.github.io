@@ -149,7 +149,7 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><h5 id="1-Spark’s-build-in-libraries"><a href="#1-Spark’s-build-in-libraries" class="headerlink" title="1. Spark’s build-in libraries:"></a>1. Spark’s build-in libraries:</h5><ul>
+    <section class="markdown-content"><h3 id="Spark-Introduction"><a href="#Spark-Introduction" class="headerlink" title="Spark Introduction"></a>Spark Introduction</h3><h5 id="1-Spark’s-build-in-libraries"><a href="#1-Spark’s-build-in-libraries" class="headerlink" title="1. Spark’s build-in libraries:"></a>1. Spark’s build-in libraries:</h5><ul>
 <li>Spark SQL: DataFrames-based      structured and semi-structured data processing</li>
 <li>Spark Streaming: Streaming analytics</li>
 <li>Spark GraphX: graph processing(page rank)</li>
@@ -167,73 +167,171 @@
 <li>In-memory cache(RDD) and In-memory Computing makes process fast.</li>
 <li>Can handle interactive, iterative  and streaming input application.</li>
 </ul>
-<h3 id="Resilient-Distributed-datasets-RDD"><a href="#Resilient-Distributed-datasets-RDD" class="headerlink" title="Resilient Distributed datasets(RDD)"></a><strong>Resilient Distributed datasets(RDD)</strong></h3><ul>
-<li>A distributed data structure.</li>
-<li>Logically partitioned across many nodes</li>
-</ul>
-<h5 id="3-Transformation-and-Actions"><a href="#3-Transformation-and-Actions" class="headerlink" title="3. Transformation and Actions:"></a><strong>3. Transformation and Actions:</strong></h5><ul>
-<li><p><strong>Transformation:</strong> apply some function on an RDD and creates a new RDD. Example: Map, Filter, flatMap, Union, groupBY, reduceByKey, sortByKey, join</p>
+<h3 id="Resilient-Distributed-datasets-RDD"><a href="#Resilient-Distributed-datasets-RDD" class="headerlink" title="Resilient Distributed datasets(RDD)"></a><strong>Resilient Distributed datasets(RDD)</strong></h3><p>A distributed data structure logically partitioned across many nodes</p>
+<h5 id="3-Transformation-and-Actions"><a href="#3-Transformation-and-Actions" class="headerlink" title="3. Transformation and Actions"></a><strong>3. Transformation and Actions</strong></h5><ul>
+<li><p><strong>Transformation:</strong> apply some function on an RDD and creates a new RDD. </p>
+<p>Example: Map, Filter, flatMap, Union, groupBY, reduceByKey, sortByKey, join</p>
 </li>
-<li><p>Example: Map, Filter, flatMap, Union, groupBY, reduceByKey, sortByKey, join</p>
+<li><p><strong>Action:</strong> Save result or display it via driver program. </p>
+<p>Example: reduce, collect, count, take, saveAsTextFile, saveAsObjectFile,foreach.</p>
 </li>
-<li><p><strong>Action:</strong> Save result or display it via driver program. Example: reduce, collect, count, take, saveAsTextFile, saveAsObjectFile,foreach.</p>
+<li><p>RDD is only computed when an Action requires a result to be returned to the driver program.</p>
 </li>
 </ul>
-<ul>
-<li>RDD is only computed when an Action requires a result to be returned to the driver program.</li>
+<h5 id="4-Two-types-of-transformation"><a href="#4-Two-types-of-transformation" class="headerlink" title="4. Two types of transformation"></a><strong>4. Two types of transformation</strong></h5><p><strong>1) Narrow transformation:</strong> Each partition of the parent RDD is used by at most one partition of the child RDD. The narrow transformations will be grouped (pipe-lined) together into a single stage. E.g. map, union, filter, flatMap</p>
+<p><strong>2) Wide transformation:</strong> Multiple child partitions may depends on one parent. This requires data in parent RDD to be shuffled across nodes. E.g. Join, groupByKey,  SortedByKey, ReduceByKey</p>
+<p>Note: Avoid to use wide transformation like GroupBy, because shuffle is a costly operation</p>
+<h5 id="5-Spark-is-lazy"><a href="#5-Spark-is-lazy" class="headerlink" title="5. Spark is lazy"></a>5. Spark is lazy</h5><ul>
+<li>Don’t compute until it gets to the first action</li>
+<li>More efficient, transformation get bundled together and only run on demand, gaining opportunities for optimization</li>
 </ul>
-<h5 id="4-Two-types-of-transformation"><a href="#4-Two-types-of-transformation" class="headerlink" title="4. Two types of transformation:"></a><strong>4. Two types of transformation:</strong></h5><ul>
-<li><strong>Narrow transformation:</strong> map, union, filter, flatMap</li>
-<li><strong>Wide transformation:</strong> multiple child partitions may depends on one parent. Join, groupByKey,      SortedByKey, ReduceByKey</li>
-<li>Wide transformation requires shuffle.</li>
-</ul>
-<ol>
-<li><strong>Spark is lazy</strong></li>
-</ol>
-<ul>
-<li>Don’t compute until it gets      to the first action</li>
-<li>More efficient,      transformation get bundled together and only run on demand, gaining      opportunities for optimization</li>
-</ul>
-<ol>
-<li><strong>Spark Internal</strong></li>
-</ol>
-<ul>
-<li>An RDD contains a list of      partitions</li>
+<h5 id="6-Spark-Internal"><a href="#6-Spark-Internal" class="headerlink" title="6. Spark Internal"></a><strong>6. Spark Internal</strong></h5><ul>
+<li>An RDD contains a list of partitions</li>
 <li>Function to compute</li>
-<li>List of parent RDD,      type(wide/narrow)</li>
-<li>A partition schema(      hash-partitioned)</li>
-<li>A computation placement hint</li>
+<li>List of parent RDD, type(wide/narrow)-&gt;Lineage</li>
+<li>A partition schema( hash-partitioned)</li>
+<li>A computation placement hint.</li>
 </ul>
-<ol>
-<li><strong>RDD Cache</strong></li>
-</ol>
-<ul>
-<li>Be used multiple times.</li>
-<li>myRDD.cache(),      SparkContext.getRDDStorageInfo()</li>
-<li>Just a hint, not      guarantee:  fraction storage, evict      least recently used RDD</li>
-<li>An RDD once consumed, its      garbage-collected.</li>
-<li>Cache commands indicates,      cached next time its loaded into memory</li>
+<h5 id="7-RDD-Cache"><a href="#7-RDD-Cache" class="headerlink" title="7. RDD Cache"></a>7. RDD Cache</h5><ul>
+<li>Cache RDD that will be used multiple times.</li>
+<li>Use myRDD.cache() to cache RDD,  use SparkContext.getRDDStorageInfo() to see the storage status of RDD.</li>
+<li>Chche is just a hint, not guarantee:  if there are not sufficient memory to storage RDD, fraction of RDD will be cached. Least recently used RDD will be evicted.</li>
+<li>Not cached RDD will not stored in memory, an RDD once consumed, its garbage-collected.</li>
+<li>Cache commands just indicates that this RDD will be cached next time its loaded into memory.</li>
 </ul>
-<ol>
-<li><strong>RDD persist:</strong> save the intermediate result so that we can reuse it if      required</li>
-</ol>
+<p>Disadvantage of cache: 1) Pay for more memory consumption. 2) In some cases, its cheaper to re-compute.</p>
+<h5 id="8-RDD-persist-storage-level"><a href="#8-RDD-persist-storage-level" class="headerlink" title="8.RDD persist storage level"></a>8.RDD persist storage level</h5><p> Save the intermediate result so that we can reuse it if required</p>
 <ul>
-<li>Memory_only-&gt;CPU-efficient,      once memory full, cached RDD will be removed an need to be recompute.      Cache. Space efficient </li>
-<li>Memory_and_Disk:      store RDD as deserialized Java object in JVM, if not fit in memory, store      partitions on disk</li>
-<li>Memory_ONLY_SER:      space-efficient, but more CPU-intensive to read</li>
-<li>Disk only: store the RDD      partitions only on disk.</li>
-<li>Memory_only_2: same as the      levels above, but replica two times. Fast fault recovery.</li>
+<li>Memory_only: CPU-efficient. In this level, RDD is stored as deserialized Java objects in the JVM. Once memory full, cached RDD will be removed an need to be recompute.  Cache() is an alias of persist(StorageLevel.MEMORY_ONLY).</li>
+<li>Memory_and_Disk: Store RDD as deserialized Java object in JVM, if not fit in memory, store partitions on disk.</li>
+<li>Memory_ONLY_SER: space-efficient, but more CPU-intensive to read.</li>
+<li>Disk only: store the RDD partitions only on disk.</li>
+<li>Memory_only_2: same as the levels above, but replica two times.  This level of storage will make fault recovery fast.</li>
 </ul>
-<ol>
-<li>Serialization</li>
-</ol>
+<h5 id="9-Serialization"><a href="#9-Serialization" class="headerlink" title="9. Serialization"></a>9. Serialization</h5><p>Serialization is a process of converting an object into a sequence of bytes which can be persisted to a disk or database.</p>
 <ul>
-<li>Java serialization: flexible      but slow</li>
+<li>Java serialization: flexible but slow</li>
 <li>Kryo serialization: faster      and more compact(used internally for shuffling RDDs)</li>
 </ul>
-<p><img src="file:///D:/UserData/TEMP/msohtmlclip1/01/clip_image001.png" alt="Serialization  (need CPU time)  OBÆCT STREAM OF BYTES  Deserialization  (need CPU time)  BYTES "></p>
+<p><img src="/2019/08/01/Spark/Ser.png" alt="Ser"></p>
+<h3 id="Spark-Cluster"><a href="#Spark-Cluster" class="headerlink" title="Spark Cluster"></a>Spark Cluster</h3><p><strong>10. Key</strong> <strong>Elements</strong> <strong>of a spark cluster</strong></p>
+<ul>
+<li>Spark driver: create SparkContext to schedule jobs execution and negotiate with cluster manager</li>
+<li>Cluster manager: manage resources of a cluster, YARN, Mesos, Spark standalone</li>
+<li>Worker(slave nodes)</li>
+<li>Executors:(A JVM instance) A process launched on a worker node, running individual tasks scheduled by      driver.</li>
+<li>Deployment mode: cluster(driver runs on worker hosts) and client mode(driver is out of cluster)</li>
+</ul>
+<h5 id="11-Cluster-Mode-VS-Client-Mode"><a href="#11-Cluster-Mode-VS-Client-Mode" class="headerlink" title="11.Cluster Mode VS Client Mode"></a>11.Cluster Mode VS Client Mode</h5><ul>
+<li>*<em>Cluster Mode: *</em>Better when there are sufficient resource(driver takes up an executor), and the job-launch environment is far away from the cluster (reduce network latency).</li>
+<li><strong>Client Mode:</strong> The driver runs outside ApplicationMaster, higher latency for driver-executor communication. When the job launch environment is near the cluster, it works better.</li>
+</ul>
+<p><img src="/2019/08/01/Spark/mode.png" alt="Mode"></p>
+<h5 id="12-Spark-Execution-Procedure-Cluster-mode"><a href="#12-Spark-Execution-Procedure-Cluster-mode" class="headerlink" title="12. Spark Execution Procedure (Cluster mode)"></a>12. Spark Execution Procedure (Cluster mode)</h5><ol>
+<li>User application creates RDD, transform them and runs actions</li>
+<li>DAGScheduler split DAG into stages of task: each stage consist of tasks(one task for each Partition) that doesn’t needs shuffling</li>
+<li>Task Scheduler responsible for sending tasks to the cluster, running them, retrying if there are failures and mitigating stragllers</li>
+<li>Executor execute tasks</li>
+</ol>
+<p><img src="/2019/08/01/Spark/Execution.png" alt="Execution"></p>
+<h5 id="13-YARN-Containers-and-Spark-Executors"><a href="#13-YARN-Containers-and-Spark-Executors" class="headerlink" title="13. YARN Containers and Spark Executors"></a>13. YARN Containers and Spark Executors</h5><ul>
+<li><p>spark.executor.instances: when running Spark on YARN, each Spark executor runs as a YARN container. # container=# executors</p>
+</li>
+<li><p><strong>Spark</strong> hosts multiple tasks with in one container. Tasks are just threads in the same JVM. This allows lower overhead of JVM. </p>
+</li>
+<li><p>Spark.executor.cores: multiple parallel threads, controls the number of concurrent tasks an executor can run.</p>
+</li>
+<li><p>Spark.task.cores: number of cores assigned to an individual task. # of parallel threads= executor cores/task cores.</p>
+</li>
+<li><p><strong>MapReduce</strong> schedules a container for each map/reduce task. This would causes high overhead because JVM has to startup and initialize structure data before running tasks.</p>
+</li>
+</ul>
+<h5 id="14-Spark-executor-memory"><a href="#14-Spark-executor-memory" class="headerlink" title="14. Spark executor memory"></a>14. Spark executor memory</h5><ul>
+<li><p>yarn.nodemanager.resource.memory-mb</p>
+</li>
+<li><p>Spark.executor.memory: Amount of memory to use per executor process</p>
+</li>
+<li><p>spark.memory.fraction: Fraction of (heap space - 300MB) used for execution and storage. The lower this is, the more frequently spills and cached data eviction occur. </p>
+</li>
+<li><p>spark.memory.storageFraction: Amount of storage memory immune to eviction.</p>
+</li>
+<li><p>Executor memory vs storage memory:  the boundary is not static, but executor has higher priority. When memory is not sufficient, spark will evict storage memory for execution.</p>
+<p><img src="/2019/08/01/Spark/memory.png" alt="Memory"></p>
+</li>
+</ul>
+<h3 id="Spark-Driver-amp-Spark-Context"><a href="#Spark-Driver-amp-Spark-Context" class="headerlink" title="Spark Driver &amp; Spark Context"></a>Spark Driver &amp; Spark Context</h3><h5 id="15-Spark-Driver"><a href="#15-Spark-Driver" class="headerlink" title="15. Spark Driver"></a>15. Spark Driver</h5><p>Spark driver is a JVM process that hosts SparkContext for a Spark application. Driver is the master node of the spark application. Spark driver splits application into tasks and schedule them run on executors. It also coordinates worker and overall execution of tasks.</p>
+<h5 id="15-Spar-Driver-main-components"><a href="#15-Spar-Driver-main-components" class="headerlink" title="15. Spar Driver main components"></a>15. Spar Driver main components</h5><ul>
+<li>Spark Context: SC objects tells spark how to access a cluster.</li>
+</ul>
+<ul>
+<li>DAG scheduler: Compute a DAG of stages for each job and submit them to task scheduler + determine preferred locations for tasks.</li>
+<li>Task Scheduler: sending tasks to the cluster, running them and retrying if failure, mitigating stragglers.</li>
+<li>Scheduler Backend: allows plugging in Yarn, Mesos, Standalone …</li>
+<li>Block Manager : Block manager on each executor and blockManagerMaster on driver initialize at constructing SparkEnv. Blockmanager reports the block on this worker to the blockManagerMaster in the Driver. It provides interfaces for putting and retrieving blocks.  RDD cache, shuffle and broadcast is realized by blockManager.</li>
+</ul>
+<h5 id="16-DAG"><a href="#16-DAG" class="headerlink" title="16. DAG"></a>16. DAG</h5><p>DAG scheduler transforms a logical execution plan(RDD lineage) to a physical execution plan(stage by stage).</p>
+<ol>
+<li>Keeps track of materialized RDD and stage outputs, find minimal schedule</li>
+<li>Determine preferred locations      to run each task  based on location      of the data or current cache status.</li>
+<li>Handles failure due to shuffle output file s being lost(resubmit)</li>
+</ol>
+<p>Spark stages are created by breaking the RDD graph at shuffle boundaries.</p>
+<p><img src="/2019/08/01/Spark/DAG.png" alt="DAG"></p>
+<h5 id="17-Shuffle"><a href="#17-Shuffle" class="headerlink" title="17. Shuffle"></a>17. Shuffle</h5><p>ShuffleMapTask write blocks to local disk and then the task in the nest stages fetches these blocks over the network(time consuming). DAG stages is created by breaking the RDD graph at shuffle boundaries.</p>
+<h5 id="18-Data-Locality"><a href="#18-Data-Locality" class="headerlink" title="18. Data Locality"></a>18. Data Locality</h5><p>In spark, pipeline functions are possible: Partition-aware to avoid shuffles and Cache-aware data reuse and locality.</p>
+<p>Spark prefers to schedule all tasks at the best locality level:</p>
+<ul>
+<li><strong>Process_Local:</strong>  on the same JVM(executor)</li>
+<li><strong>Node_Local:</strong> on the same worker but not same executor.</li>
+<li><strong>No_Pref data</strong></li>
+<li><strong>RACK_Local data:</strong> In the same cluster.</li>
+<li><strong>ANY data:</strong> elsewhere on the network and not in the same rack.</li>
+<li><strong>spark.locality.wait:</strong>  default 3s. How long to wait to launch a data-local task before giving up and launching it on a less-local node. Could be smaller is the data is small and network delay is small.</li>
+</ul>
+<p><img src="/2019/08/01/Spark/Locality.png" alt="Locality"></p>
+<h5 id="19-RDD-Lineage"><a href="#19-RDD-Lineage" class="headerlink" title="19. RDD Lineage"></a>19. RDD Lineage</h5><p><img src="/2019/08/01/Spark/Lineage.png" alt="Lineage"></p>
+<p>Lineage : the sequence of transformations used to produce the current RDD = “dependency of RDDs”. RDD log lineage information rather than the actual data.</p>
+<h3 id="Fault-Tolerance"><a href="#Fault-Tolerance" class="headerlink" title="Fault Tolerance"></a>Fault Tolerance</h3><h5 id="20-RDD-Fault-Tolerance"><a href="#20-RDD-Fault-Tolerance" class="headerlink" title="20. RDD Fault Tolerance"></a>20. RDD Fault Tolerance</h5><ul>
+<li><p>RDDs track the series of  transformations used to rebuild them( lineage) to recompute lost data</p>
+</li>
+<li><p>Re-compute only the lost partitions of an RDD</p>
+<ul>
+<li>Narrow dependency : only depends on a few partitions that needs to be recomputed</li>
+<li>Wide dependency: might requires to recompute an entire RDD</li>
+</ul>
+</li>
+<li><p>Would recursively back to very root or the previous checkpoint. </p>
+</li>
+</ul>
+<h5 id="21-Spark-Parallel-Recovery"><a href="#21-Spark-Parallel-Recovery" class="headerlink" title="21. Spark Parallel Recovery"></a>21. Spark Parallel Recovery</h5><ul>
+<li>Narrow transformation: If a node fails, re-compute its dataset partitions in parallel on other node. Only re-compute the lost partitions.</li>
+<li>Wide Transformation: Backtrack parent RDD(s) and re-compute only this partition, others are copied from remote nodes.</li>
+</ul>
+<p><img src="/2019/08/01/Spark/Wide.png" alt="wide"></p>
+<h5 id="22-Checkpoint"><a href="#22-Checkpoint" class="headerlink" title="22. Checkpoint()"></a>22. Checkpoint()</h5><p>Recovery for long lineage chains may be time-consuming. Therefore use checkpoint to write data to storage(HDFS) so that task can be recovered.</p>
+<p>Difference of Checkpoint and persist:1) persist has different levels of storage(memory, disk, memory and disk), checkpoint write data to HDFS with replica. 2) Persisted RDD keeps lineage info but checkpoint RDD truncated. 3). Data persisted managed by blockManager will be removed if the application ended while checkpoint RDD stored in HDFS unless manually removed. It can be used by latter applications. </p>
+<p>RDD should be cached before checkpoint, so that data will be saved in memory while saving to storage.</p>
+<h5 id="23-More-about-Checkpoint"><a href="#23-More-about-Checkpoint" class="headerlink" title="23. More about Checkpoint"></a>23. More about Checkpoint</h5><p>What kinds of RDD needs checkpoint?</p>
+<p>1) the computation requires a long time</p>
+<p>2) The computation chain is too long.</p>
+<p>3) The RDD that depends on too many RDDs.</p>
+<h5 id="24-spark-speculation"><a href="#24-spark-speculation" class="headerlink" title="24. spark.speculation"></a>24. spark.speculation</h5><p>If set to “true”, performs speculative execution of tasks. This means if one or more tasks are running slowly in a stage, they will be re-launched. Speculative may cause program working slow because of resource limitation.</p>
+<ul>
+<li>*<em>spark.speculation.interval: *</em> How often Spark will check for tasks to speculate.</li>
+<li><strong>spark.speculation.multiplier:</strong> How many times slower a task is than the median to be considered for speculation.</li>
+<li><strong>spark.speculation.quantile:</strong> Fraction of tasks which must be complete before speculation is enabled for a particular stage.</li>
+</ul>
 </section>
     <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#Cloud Computing" >
+    <span class="tag-code">Cloud Computing</span>
+  </a>
+
+      </div>
     
     <!-- Tags END -->
     <!-- NAV START -->
@@ -242,9 +340,9 @@
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
     
-      <a class="nav-right" href="/2019/08/29/hello-world/">
+      <a class="nav-right" href="/2019/08/30/Leetcode/">
         
-          Hello World
+          Leetcode solution
         
         <span class="nav-arrow"> →</span>
       </a>
@@ -274,7 +372,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#1-Spark’s-build-in-libraries"><span class="toc-nav-text">1. Spark’s build-in libraries:</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#2-Why-Spark"><span class="toc-nav-text">2. Why Spark?</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Resilient-Distributed-datasets-RDD"><span class="toc-nav-text">Resilient Distributed datasets(RDD)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#3-Transformation-and-Actions"><span class="toc-nav-text">3. Transformation and Actions:</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#4-Two-types-of-transformation"><span class="toc-nav-text">4. Two types of transformation:</span></a></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Spark-Introduction"><span class="toc-nav-text">Spark Introduction</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#1-Spark’s-build-in-libraries"><span class="toc-nav-text">1. Spark’s build-in libraries:</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#2-Why-Spark"><span class="toc-nav-text">2. Why Spark?</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Resilient-Distributed-datasets-RDD"><span class="toc-nav-text">Resilient Distributed datasets(RDD)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#3-Transformation-and-Actions"><span class="toc-nav-text">3. Transformation and Actions</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#4-Two-types-of-transformation"><span class="toc-nav-text">4. Two types of transformation</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#5-Spark-is-lazy"><span class="toc-nav-text">5. Spark is lazy</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#6-Spark-Internal"><span class="toc-nav-text">6. Spark Internal</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#7-RDD-Cache"><span class="toc-nav-text">7. RDD Cache</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#8-RDD-persist-storage-level"><span class="toc-nav-text">8.RDD persist storage level</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#9-Serialization"><span class="toc-nav-text">9. Serialization</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Spark-Cluster"><span class="toc-nav-text">Spark Cluster</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#11-Cluster-Mode-VS-Client-Mode"><span class="toc-nav-text">11.Cluster Mode VS Client Mode</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#12-Spark-Execution-Procedure-Cluster-mode"><span class="toc-nav-text">12. Spark Execution Procedure (Cluster mode)</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#13-YARN-Containers-and-Spark-Executors"><span class="toc-nav-text">13. YARN Containers and Spark Executors</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#14-Spark-executor-memory"><span class="toc-nav-text">14. Spark executor memory</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Spark-Driver-amp-Spark-Context"><span class="toc-nav-text">Spark Driver &amp; Spark Context</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#15-Spark-Driver"><span class="toc-nav-text">15. Spark Driver</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#15-Spar-Driver-main-components"><span class="toc-nav-text">15. Spar Driver main components</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#16-DAG"><span class="toc-nav-text">16. DAG</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#17-Shuffle"><span class="toc-nav-text">17. Shuffle</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#18-Data-Locality"><span class="toc-nav-text">18. Data Locality</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#19-RDD-Lineage"><span class="toc-nav-text">19. RDD Lineage</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Fault-Tolerance"><span class="toc-nav-text">Fault Tolerance</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#20-RDD-Fault-Tolerance"><span class="toc-nav-text">20. RDD Fault Tolerance</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#21-Spark-Parallel-Recovery"><span class="toc-nav-text">21. Spark Parallel Recovery</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#22-Checkpoint"><span class="toc-nav-text">22. Checkpoint()</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#23-More-about-Checkpoint"><span class="toc-nav-text">23. More about Checkpoint</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#24-spark-speculation"><span class="toc-nav-text">24. spark.speculation</span></a></li></ol></li></ol></li></ol>
     
   </div>
 </aside>
