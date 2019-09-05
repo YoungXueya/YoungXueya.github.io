@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="YangXueya&#39;s blog">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      Python Collections | YangXueya
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    <script src="/js/qrious.js"></script>
+  
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>YangXueya</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>Python Collections</h2>
+  <p class="post-date">2019-09-05</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>This blog will introduce collections in Python. There are several datatypes under this module, but I will only use two types I usually uses.</p>
+<table>
+<thead>
+<tr>
+<th><a href="https://docs.python.org/3/library/collections.html#collections.namedtuple" target="_blank" rel="noopener"><code>namedtuple()</code></a></th>
+<th>factory function for creating tuple subclasses with named fields</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="https://docs.python.org/3/library/collections.html#collections.deque" target="_blank" rel="noopener"><code>deque</code></a></td>
+<td>list-like container with fast appends and pops on either end</td>
+</tr>
+<tr>
+<td><a href="https://docs.python.org/3/library/collections.html#collections.ChainMap" target="_blank" rel="noopener"><code>ChainMap</code></a></td>
+<td>dict-like class for creating a single view of multiple mappings</td>
+</tr>
+<tr>
+<td><a href="https://docs.python.org/3/library/collections.html#collections.Counter" target="_blank" rel="noopener"><code>Counter</code></a></td>
+<td>dict subclass for counting hashable objects</td>
+</tr>
+<tr>
+<td><a href="https://docs.python.org/3/library/collections.html#collections.OrderedDict" target="_blank" rel="noopener"><code>OrderedDict</code></a></td>
+<td>dict subclass that remembers the order entries were added</td>
+</tr>
+<tr>
+<td><a href="https://docs.python.org/3/library/collections.html#collections.defaultdict" target="_blank" rel="noopener"><code>defaultdict</code></a></td>
+<td>dict subclass that calls a factory function to supply missing values</td>
+</tr>
+<tr>
+<td><a href="https://docs.python.org/3/library/collections.html#collections.UserDict" target="_blank" rel="noopener"><code>UserDict</code></a></td>
+<td>wrapper around dictionary objects for easier dict subclassing</td>
+</tr>
+<tr>
+<td><a href="https://docs.python.org/3/library/collections.html#collections.UserList" target="_blank" rel="noopener"><code>UserList</code></a></td>
+<td>wrapper around list objects for easier list subclassing</td>
+</tr>
+<tr>
+<td><a href="https://docs.python.org/3/library/collections.html#collections.UserString" target="_blank" rel="noopener"><code>UserString</code></a></td>
+<td>wrapper around string objects for easier string subclassing</td>
+</tr>
+</tbody></table>
+<ul>
+<li><h3 id="deque"><a href="#deque" class="headerlink" title="deque"></a>deque</h3></li>
+</ul>
+<p>collections.deque([iterable[,maxlen]]) returns a double-end queue. Deque is pronounced “deck” (short for “Double-ended queue”). The pop and append operation in deque requires only O(1) time. </p>
+<p>If maxlen in deque is not specified, deque could append as many items as user want. Otherwise, the element in the other side of append will be evicted. </p>
+<p>Deque is a good datatype for BFS. Here is an example.</p>
+<p>Duque support the following methods:</p>
+<ul>
+<li>append(x): Add element x from right side of queue</li>
+<li>appendleft(x): Add x from the left side</li>
+<li>clear(): Remove all elements form the deque</li>
+<li>copy(): Create a shallow copy[1] of deque.</li>
+<li>count(x): Count the frequency of in deque.</li>
+<li>extend( <em>iterable</em>): Extend the right side of the deque by appending elements from the iterable augment</li>
+<li>extendleft(<em>iterable</em>)</li>
+<li>index(x,start,end): Find the first match of x (if start and end or raise ValueError if not found.</li>
+<li>insert(i,x): Insert x at position i where i &lt;maxlen(if maxlen specified, will cause IndexError)</li>
+<li>pop(): Return an element from the right side.</li>
+<li>popleft()</li>
+<li>remove(value): Return the first matched value.</li>
+<li>reverse(): Reverse the deque.</li>
+<li>rotate(n=1): Rotate the deque n steps to the right. If n&lt;0, rotate left. Rotate one to right equals to d.appendleft(a.pop())</li>
+</ul>
+<p>In addition to the above, deques support iteration, pickling, <code>len(d)</code>, <code>reversed(d)</code>, <code>copy.copy(d)</code>, <code>copy.deepcopy(d)</code>, membership testing with the <a href="https://docs.python.org/3/reference/expressions.html#in" target="_blank" rel="noopener"><code>in</code></a> operator, and subscript references such as <code>d[-1]</code>. Indexed access is O(1) at both ends but slows to O(n) in the middle. For fast random access, use lists instead.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="keyword">import</span> collections <span class="keyword">as</span> co</span><br><span class="line">&gt;&gt;&gt;d=co.deque()</span><br><span class="line">&gt;&gt;&gt;a.append(<span class="number">1</span>)</span><br><span class="line">&gt;&gt;&gt;a.appendleft(<span class="number">2</span>)</span><br><span class="line">&gt;&gt;&gt;a.append(<span class="number">3</span>)</span><br><span class="line">...</span><br><span class="line">&gt;&gt;&gt;a</span><br><span class="line">deque([<span class="number">2</span>, <span class="number">4</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">3</span>])</span><br><span class="line">&gt;&gt;&gt;a.index(<span class="number">1</span>)</span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.index(<span class="number">1</span>,<span class="number">4</span>,len(a))</span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.popleft()</span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.pop()</span><br><span class="line"><span class="number">3</span></span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt; a</span><br><span class="line">deque([<span class="number">4</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.rotate(<span class="number">2</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">deque([<span class="number">1</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">2</span>])</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><h3 id="OrderedDict-objects"><a href="#OrderedDict-objects" class="headerlink" title="OrderedDict objects"></a>OrderedDict objects</h3></li>
+</ul>
+<p>Same as regular dictionaries but have some extra capabilities relating to ordering operations.</p>
+<p>Comparison of dict and OrderedDict</p>
+<ul>
+<li><p>The regular <a href="https://docs.python.org/3/library/stdtypes.html#dict" target="_blank" rel="noopener"><code>dict</code></a> was designed to be very good at mapping operations. Tracking insertion order was secondary.</p>
+</li>
+<li><p>The <a href="https://docs.python.org/3/library/collections.html#collections.OrderedDict" target="_blank" rel="noopener"><code>OrderedDict</code></a> was designed to be good at reordering operations. Space efficiency, iteration speed, and the performance of update operations were secondary.</p>
+</li>
+<li><p>Algorithmically, <a href="https://docs.python.org/3/library/collections.html#collections.OrderedDict" target="_blank" rel="noopener"><code>OrderedDict</code></a> can handle frequent reordering operations better than <a href="https://docs.python.org/3/library/stdtypes.html#dict" target="_blank" rel="noopener"><code>dict</code></a>. This makes it suitable for tracking recent accesses . An example of <a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/146.%20LRU%20Cache.py" target="_blank" rel="noopener">LRU cache</a> using OrderedDict</p>
+</li>
+</ul>
+<p>Methods added:</p>
+<ul>
+<li><p><code>popitem</code>(<em>last=True</em>)</p>
+<p>The <a href="https://docs.python.org/3/library/collections.html#collections.OrderedDict.popitem" target="_blank" rel="noopener"><code>popitem()</code></a> method for ordered dictionaries returns and removes a (key, value) pair. The pairs are returned in LIFO order if <em>last</em> is true or FIFO order if false.</p>
+</li>
+<li><p><code>move_to_end</code>(<em>key</em>, <em>last=True</em>)</p>
+<p>Move an existing <em>key</em> to either end of an ordered dictionary. The item is moved to the right end if <em>last</em> is true (the default) or to the beginning if <em>last</em> is false. Raises <a href="https://docs.python.org/3/library/exceptions.html#KeyError" target="_blank" rel="noopener"><code>KeyError</code></a> if the <em>key</em> does not exist:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>d = OrderedDict.fromkeys(<span class="string">'abcde'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d.move_to_end(<span class="string">'b'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">''</span>.join(d.keys())</span><br><span class="line"><span class="string">'acdeb'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d.move_to_end(<span class="string">'b'</span>, last=<span class="literal">False</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">''</span>.join(d.keys())</span><br><span class="line"><span class="string">'bacde'</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><em>Shallow copy:</em></p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#Python" >
+    <span class="tag-code">Python</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/09/03/YangXueya/">
+        <span class="nav-arrow">← </span>
+        
+          (untitled)
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#deque"><span class="toc-nav-text">deque</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#OrderedDict-objects"><span class="toc-nav-text">OrderedDict objects</span></a></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://yoursite.com/2019/09/05/collections/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>

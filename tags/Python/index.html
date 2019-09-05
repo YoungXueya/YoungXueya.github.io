@@ -10,7 +10,7 @@
   
   <title>
     
-      Tags | YangXueya
+      YangXueya
     
   </title>
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -140,87 +140,60 @@
 </header>
 
     <div id="article-banner">
-  <h2>Tags</h2>
-  <p class="post-date">标签检索</p>
+  <h2>Archives</h2>
+  <p class="post-date">文章归档</p>
 </div>
-<main class="app-body">
-  <div id="tag-cloud">
+<main class="app-body" id="archives">
+  
+  
+  
+    <section class="time-section">
+  <h1 class="section-year">
+    2019
+  </h1>
+  <div class="section-list">
     
-      <a class="tag0" data-name="tag-Python">Python</a>
     
-      <a class="tag2" data-name="tag-Advanced Database">Advanced Database</a>
+      <div class="section-list-item">
+        <a href="/2019/09/05/collections/" class="archive-title">Python Collections</a>
+        <p class="archive-date">09-05</p>
+      </div>
     
-      <a class="tag2" data-name="tag-Cloud Computing">Cloud Computing</a>
+      <div class="section-list-item">
+        <a href="/2019/09/03/YangXueya/" class="archive-title"></a>
+        <p class="archive-date">09-03</p>
+      </div>
     
-      <a class="tag2" data-name="tag-Leetcode">Leetcode</a>
+      <div class="section-list-item">
+        <a href="/2019/09/02/SparkStreaming/" class="archive-title">Spark Streaming</a>
+        <p class="archive-date">09-02</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/09/01/DBMS/" class="archive-title">Database Management System</a>
+        <p class="archive-date">09-01</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/08/30/Leetcode/" class="archive-title">Leetcode solution</a>
+        <p class="archive-date">08-30</p>
+      </div>
+    
+      <div class="section-list-item">
+        <a href="/2019/08/01/Spark/" class="archive-title">Basic Knowledge of Spark</a>
+        <p class="archive-date">08-01</p>
+      </div>
     
   </div>
+</section>
   
-    <div class="tag-list">
-      <h3 class="tag-name" id="tag-Python">Python</h3>
-      
-        <ul class="tag-preview">
-          <li>
-            <a href="/2019/09/05/collections/">Python Collections</a>
-          </li>
-        </ul>
-        
-    </div>
-    
-    <div class="tag-list">
-      <h3 class="tag-name" id="tag-Advanced Database">Advanced Database</h3>
-      
-        <ul class="tag-preview">
-          <li>
-            <a href="/2019/09/01/DBMS/">Database Management System</a>
-          </li>
-        </ul>
-        
-    </div>
-    
-    <div class="tag-list">
-      <h3 class="tag-name" id="tag-Cloud Computing">Cloud Computing</h3>
-      
-        <ul class="tag-preview">
-          <li>
-            <a href="/2019/09/02/SparkStreaming/">Spark Streaming</a>
-          </li>
-        </ul>
-        
-        <ul class="tag-preview">
-          <li>
-            <a href="/2019/08/01/Spark/">Basic Knowledge of Spark</a>
-          </li>
-        </ul>
-        
-    </div>
-    
-    <div class="tag-list">
-      <h3 class="tag-name" id="tag-Leetcode">Leetcode</h3>
-      
-        <ul class="tag-preview">
-          <li>
-            <a href="/2019/08/30/Leetcode/">Leetcode solution</a>
-          </li>
-        </ul>
-        
-    </div>
-    
 </main>
 
 <script>
   (function () {
-    var url = 'http://yoursite.com/tags/index.html'
-    $('#article-banner').geopattern(url)
-    $('.header').removeClass('fixed-header')
-
-    var tag = location.hash.replace('#', '')
-    if (tag) {
-      var tagId = "#tag-" + tag;
-      $("html, body").animate({
-        scrollTop: $(tagId).offset().top 
-      }, 400)
-    }
+    var url = 'http://yoursite.com/tags/Python/index.html';
+    $('#article-banner').geopattern(url);
+    $('.header').removeClass('fixed-header');
   })();
 </script>
     <div class="scroll-top">
