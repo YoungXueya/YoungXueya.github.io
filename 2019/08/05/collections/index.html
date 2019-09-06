@@ -10,7 +10,7 @@
   
   <title>
     
-      Python Collections | YangXueya
+      Python--Deque and OrderedDict | YangXueya
     
   </title>
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -140,8 +140,8 @@
 </header>
 
     <div id="article-banner">
-  <h2>Python Collections</h2>
-  <p class="post-date">2019-09-05</p>
+  <h2>Python--Deque and OrderedDict</h2>
+  <p class="post-date">2019-08-05</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -149,7 +149,7 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><p>This blog will introduce collections in Python. There are several datatypes under this module, but I will only use two types I usually uses.</p>
+    <section class="markdown-content"><p>This blog will introduce collections in Python. There are several datatypes under this module, but I will only record two types I usually uses.</p>
 <table>
 <thead>
 <tr>
@@ -158,7 +158,7 @@
 </tr>
 </thead>
 <tbody><tr>
-<td><a href="https://docs.python.org/3/library/collections.html#collections.deque" target="_blank" rel="noopener"><code>deque</code></a></td>
+<td><a href="https://docs.python.org/3/library/collections.html#collections.deque" target="_blank" rel="noopener"><strong><code>deque</code></strong></a></td>
 <td>list-like container with fast appends and pops on either end</td>
 </tr>
 <tr>
@@ -170,7 +170,7 @@
 <td>dict subclass for counting hashable objects</td>
 </tr>
 <tr>
-<td><a href="https://docs.python.org/3/library/collections.html#collections.OrderedDict" target="_blank" rel="noopener"><code>OrderedDict</code></a></td>
+<td><a href="https://docs.python.org/3/library/collections.html#collections.OrderedDict" target="_blank" rel="noopener"><strong><code>OrderedDict</code></strong></a></td>
 <td>dict subclass that remembers the order entries were added</td>
 </tr>
 <tr>
@@ -190,12 +190,9 @@
 <td>wrapper around string objects for easier string subclassing</td>
 </tr>
 </tbody></table>
-<ul>
-<li><h3 id="deque"><a href="#deque" class="headerlink" title="deque"></a>deque</h3></li>
-</ul>
-<p>collections.deque([iterable[,maxlen]]) returns a double-end queue. Deque is pronounced “deck” (short for “Double-ended queue”). The pop and append operation in deque requires only O(1) time. </p>
+<h3 id="deque"><a href="#deque" class="headerlink" title="deque"></a>deque</h3><p>collections.deque([iterable[,maxlen]]) returns a double-end queue. Deque is pronounced “deck” (short for “Double-ended queue”). The pop and append operation in deque requires only O(1) time. </p>
 <p>If maxlen in deque is not specified, deque could append as many items as user want. Otherwise, the element in the other side of append will be evicted. </p>
-<p>Deque is a good datatype for BFS. Here is an example.</p>
+<p>Deque is a good datatype for BFS. <a href="https://github.com/YoungXueya/LeetcodeSolution/blob/5b2eb2685dc0a70355f0b16213f55bd0539c5cdd/src/107.%20Binary%20Tree%20Level%20Order%20Traversal%20II.py" target="_blank" rel="noopener">Here</a> is an example.</p>
 <p>Duque support the following methods:</p>
 <ul>
 <li>append(x): Add element x from right side of queue</li>
@@ -226,7 +223,7 @@
 </li>
 <li><p>The <a href="https://docs.python.org/3/library/collections.html#collections.OrderedDict" target="_blank" rel="noopener"><code>OrderedDict</code></a> was designed to be good at reordering operations. Space efficiency, iteration speed, and the performance of update operations were secondary.</p>
 </li>
-<li><p>Algorithmically, <a href="https://docs.python.org/3/library/collections.html#collections.OrderedDict" target="_blank" rel="noopener"><code>OrderedDict</code></a> can handle frequent reordering operations better than <a href="https://docs.python.org/3/library/stdtypes.html#dict" target="_blank" rel="noopener"><code>dict</code></a>. This makes it suitable for tracking recent accesses . An example of <a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/146.%20LRU%20Cache.py" target="_blank" rel="noopener">LRU cache</a> using OrderedDict</p>
+<li><p>Algorithmically, <a href="https://docs.python.org/3/library/collections.html#collections.OrderedDict" target="_blank" rel="noopener"><code>OrderedDict</code></a> can handle frequent reordering operations better than <a href="https://docs.python.org/3/library/stdtypes.html#dict" target="_blank" rel="noopener"><code>dict</code></a>. This makes it suitable for tracking recent accesses . An example of <a href="https://github.com/YoungXueya/LeetcodeSolution/blob/master/src/146.%20LRU%20Cache.py" target="_blank" rel="noopener">LRU cache</a> using OrderedDict.</p>
 </li>
 </ul>
 <p>Methods added:</p>
@@ -240,7 +237,8 @@
 
 </li>
 </ul>
-<p><em>Shallow copy:</em></p>
+<p>In addition to the usual mapping methods, ordered dictionaries also support reverse iteration using <a href="https://docs.python.org/3/library/functions.html#reversed" target="_blank" rel="noopener"><code>reversed()</code></a>.</p>
+<p><em>Shallow copy:</em> Shallow copy constructs a new compound object and then (to the extent possible) inserts <em>references</em> into it to the objects found in the original.</p>
 </section>
     <!-- Tags START -->
     
@@ -259,13 +257,20 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2019/09/03/YangXueya/">
+      <a class="nav-left" href="/2019/08/04/Copy/">
         <span class="nav-arrow">← </span>
         
-          (untitled)
+          Assignment vs Shallow Copy vs Deep Copy
         
       </a>
     
+    
+      <a class="nav-right" href="/2019/08/30/Leetcode/">
+        
+          Leetcode solution
+        
+        <span class="nav-arrow"> →</span>
+      </a>
     
   </div>
 
@@ -302,7 +307,7 @@
 
 <script>
   (function () {
-    var url = 'http://yoursite.com/2019/09/05/collections/';
+    var url = 'http://yoursite.com/2019/08/05/collections/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
