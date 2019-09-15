@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="YangXueya&#39;s blog">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      Data Mining (1)-- Basics | YangXueya
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    <script src="/js/qrious.js"></script>
+  
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>YangXueya</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>Data Mining (1)-- Basics</h2>
+  <p class="post-date">2019-09-08</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><h3 id="Data-and-Knowledge"><a href="#Data-and-Knowledge" class="headerlink" title="Data and Knowledge"></a>Data and Knowledge</h3><ul>
+<li><strong>Data：</strong> A collection of facts about certain group of objects.</li>
+<li><strong>Pattern:</strong> Certain characteristics of data that are frequently observed.</li>
+<li><strong>Knowledge:</strong> Some general rules about the objects.</li>
+</ul>
+<h3 id="Data-mining-and-KDD"><a href="#Data-mining-and-KDD" class="headerlink" title="Data mining and KDD"></a>Data mining and KDD</h3><p>KDD stands for Knowledge Discovery in Database. It is a process of discovering useful knowledge from big collections of data. </p>
+<p>KDD is a process of identifying <strong>Valid, Novel, potentially useful and understandable</strong> patterns in data and deriving knowledge from the, </p>
+<p>Data Mining is a step of KDD process in which interesting patterns are discovered. Some of these patterns are then interpreted and transformed into useful knowledge.</p>
+<p>A user needs to decide what kinds of patterns he is interested and to pick a particular data mining algorithm to extract patterns.</p>
+<p>A traditional DB usually only provides the function of storing and retrieving facts.</p>
+<h3 id="Result-of-Data-Mining"><a href="#Result-of-Data-Mining" class="headerlink" title="Result of Data Mining"></a>Result of Data Mining</h3><p>The knowledge resulting from data mining should carry certain degree of <strong>predictive</strong> ability or <strong>descriptive</strong> ability.</p>
+<p><strong>Prediction</strong> involves using the database records that describe information about past behavior to automatically generate a model that can predict future behavior.(Example, Classification)</p>
+<p><strong>Description</strong> involves deriving patterns that summarize the underlying relationships in data and to describe the characteristics of data. (Example, clustering)</p>
+<h3 id="Data-Warehousing"><a href="#Data-Warehousing" class="headerlink" title="Data Warehousing"></a>Data Warehousing</h3><p>A data warehouse is an integration of various departmental database so that accesses to organization-wide data is possible. </p>
+<p>A data warehouse is a convenient place where KDD and data mining applications are performed.</p>
+<h3 id="OLAP"><a href="#OLAP" class="headerlink" title="OLAP"></a>OLAP</h3><p>The OLAP approach allows users to view data in multi-dimensional model(a Data Cube), supporting fast aggregation and summarization operations.</p>
+<p>A process of Selection-&gt; Group By-&gt; Summarization.</p>
+<h3 id="Data-Mining-Tasks"><a href="#Data-Mining-Tasks" class="headerlink" title="Data Mining Tasks:"></a>Data Mining Tasks:</h3><ul>
+<li>Classification</li>
+<li>Clustering</li>
+<li>Association Analysis</li>
+<li>Regression</li>
+</ul>
+<h3 id="Data-Types"><a href="#Data-Types" class="headerlink" title="Data Types"></a>Data Types</h3><p>Collection of data objects and their attributes. Object is also known as record, entity, tuple. An attribute is a property or characteristic of an object. A collection of attributes describe an object.</p>
+<h5 id="Types-of-Attributes"><a href="#Types-of-Attributes" class="headerlink" title="Types of Attributes:"></a>Types of Attributes:</h5><ul>
+<li><p>Binary: Values are either 0 or 1, used to denote the presence of absence of a feature. Example: words in a document.</p>
+</li>
+<li><p>Nominal: Values are (discrete) names. Example: ID numbers, eye color.</p>
+</li>
+<li><p>Ordinal: Values are discrete names that are ordered. Example: rankings, grades.</p>
+</li>
+<li><p>Numerical: Values are numbers with which arithmetic operators can be applied. Example: height, speed.</p>
+</li>
+<li><p><em>Asymmetric attribute:</em> Attributes that only presence values are important. Example, 1 for item purchased.</p>
+</li>
+</ul>
+<h5 id="Types-of-data"><a href="#Types-of-data" class="headerlink" title="Types of data"></a>Types of data</h5><ul>
+<li><p><strong>Record(structured):</strong> Database tables.</p>
+</li>
+<li><p><strong>Document data( sparse vectors)</strong></p>
+<p>Each document is modeled as a vector of terms. Each term is a component(attribute) of the vector(document).</p>
+<ul>
+<li>TF(term-frequency) model: value of each component is the number of times the corresponding term occurs in the document. Term vectors could be used to measure the similarity of documents.</li>
+<li>Problem with TF-model: frequently occurring words dominate the vector.</li>
+<li>TF-IDF model:</li>
+</ul>
+<p><img src="/2019/09/08/MLBasic/TFIDF.png" alt="TF"></p>
+</li>
+<li><p><strong>Set-valued Data:</strong>(Transactional Data)</p>
+<p>Each record is a set of items, example: market-basket data.</p>
+</li>
+<li><p><strong>Graph:</strong> WWW, Social network</p>
+</li>
+<li><p><strong>Spatial-temporal:</strong> Spatial data(location),Time series data, sequence data.</p>
+</li>
+<li><p><strong>Other unstructured data:</strong> Example: images, sound files, video.</p>
+<ul>
+<li>Extracting features from them( e.g. color histogram’s, frequency, etc.)</li>
+<li>Representing them as record(structured) data based on features they contain.</li>
+<li>Other descriptive data, such as tags, text descriptions.</li>
+</ul>
+<h5 id="Data-Quality"><a href="#Data-Quality" class="headerlink" title="Data Quality"></a>Data Quality</h5></li>
+</ul>
+<h5 id="Data-Qualify"><a href="#Data-Qualify" class="headerlink" title="Data Qualify"></a>Data Qualify</h5><p>  Data quality problems:</p>
+<ul>
+<li><p>Noise(incorrect data) and outliers(unusual data)</p>
+<p>Noise in data occurs due to error in data collection(e.g. a student of age 123 years old)</p>
+<p>Outliers are data that deviate so much from the norm that they may represent some rare of exceptional cases. Outliers are not necessarily noise.</p>
+</li>
+<li><p>Detecting Outliers: One method to detect outliers is to perform cluster analysis. Points that do not fall into any cluster could be flagged as outliers</p>
+<ul>
+<li>Handling Noise: Perform outlier detection and then check manually whether the outliers are likely noise.</li>
+</ul>
+</li>
+<li><p>missing value</p>
+<p>Possible actions handle missing values</p>
+<ul>
+<li>Ignore records with missing value(if only a small fraction of fata contains missing values)</li>
+</ul>
+</li>
+<li><p>Go and find missing data</p>
+<ul>
+<li>Guess, fill in the missing value with average, major.</li>
+</ul>
+</li>
+<li><p>Duplicate and inconsistent data</p>
+</li>
+</ul>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#Data Mining" >
+    <span class="tag-code">Data Mining</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/09/03/YangXueya/">
+        <span class="nav-arrow">← </span>
+        
+          Yang Xueya
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2019/09/09/PreProcess/">
+        
+          Data Mining (2) --Data Preprocess
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Data-and-Knowledge"><span class="toc-nav-text">Data and Knowledge</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Data-mining-and-KDD"><span class="toc-nav-text">Data mining and KDD</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Result-of-Data-Mining"><span class="toc-nav-text">Result of Data Mining</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Data-Warehousing"><span class="toc-nav-text">Data Warehousing</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#OLAP"><span class="toc-nav-text">OLAP</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Data-Mining-Tasks"><span class="toc-nav-text">Data Mining Tasks:</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Data-Types"><span class="toc-nav-text">Data Types</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#Types-of-Attributes"><span class="toc-nav-text">Types of Attributes:</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#Types-of-data"><span class="toc-nav-text">Types of data</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#Data-Quality"><span class="toc-nav-text">Data Quality</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#Data-Qualify"><span class="toc-nav-text">Data Qualify</span></a></li></ol></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://yoursite.com/2019/09/08/MLBasic/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>

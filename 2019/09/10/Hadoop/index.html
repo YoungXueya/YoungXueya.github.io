@@ -10,7 +10,7 @@
   
   <title>
     
-      Database Management System | YangXueya
+      Hadoop | YangXueya
     
   </title>
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -140,8 +140,8 @@
 </header>
 
     <div id="article-banner">
-  <h2>Database Management System</h2>
-  <p class="post-date">2019-09-01</p>
+  <h2>Hadoop</h2>
+  <p class="post-date">2019-09-10</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -149,15 +149,39 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><p>To Be finished</p>
+    <section class="markdown-content"><h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>The Apache Hadoop software library is a framework that allows for the <strong>distributed processing</strong> of <strong>large data sets</strong> across clusters of computers using <strong>simple programming models.</strong></p>
+<p>Hadoop 2.x takes Hadoop beyond batch application: Allow for multiple ways to interact with data stored in HDFS: (1) batch with MapReduce(MR), (2) streaming with Spark/Storm, (3) interactive SQL with Spark SQL, Hive.</p>
+<p><img src="/2019/09/10/Hadoop/Hadoop.png" alt="Hadoop"></p>
+<p><strong>Apache Hadoop contains the following modules:</strong></p>
+<ol>
+<li>Hadoop Common- contains libraries and utilities needed by other Hadoop modules.</li>
+<li>Hadoop Distributed File System(HDFS): A distributed system for storing data</li>
+<li>Hadoop MapReduce: A programming model for large scale data processing</li>
+<li>Hadoop YARN: resource-management and task scheduling.</li>
+</ol>
+<p><strong>Hadoop 1.x: Key Components</strong></p>
+<ol>
+<li><p>Job Tracker@master node</p>
+<p>Keeps track of all MapReduce jobs that are running on various nodes.</p>
+</li>
+<li><p>Name Node@master node</p>
+<p>Store metadata: file/chuck namespaces, file-to chunk mapping, location of each chunk’s replicas. </p>
+</li>
+<li><p>Task Tracker@each slave node</p>
+<p>A slave to Job Tracker. Lauches child processes(JVMs) to execute the map or reduce tasks.</p>
+</li>
+<li><p>Data Node@each slave node</p>
+<p>A slave to the Name Node. Stores data on the local file system.</p>
+</li>
+</ol>
 </section>
     <!-- Tags START -->
     
       <div class="tags">
         <span>Tags:</span>
         
-  <a href="/tags#Advanced Database" >
-    <span class="tag-code">Advanced Database</span>
+  <a href="/tags#Cloud Computing" >
+    <span class="tag-code">Cloud Computing</span>
   </a>
 
       </div>
@@ -168,17 +192,17 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2019/08/30/Leetcode/">
+      <a class="nav-left" href="/2019/09/09/PreProcess/">
         <span class="nav-arrow">← </span>
         
-          Leetcode solution
+          Data Mining (2) --Data Preprocess
         
       </a>
     
     
-      <a class="nav-right" href="/2019/09/02/SparkStreaming/">
+      <a class="nav-right" href="/2019/09/10/Classification/">
         
-          Spark Streaming
+          Data Mining (3)-- Classification
         
         <span class="nav-arrow"> →</span>
       </a>
@@ -208,7 +232,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="nav">none</ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Introduction"><span class="toc-nav-text">Introduction</span></a></li></ol>
     
   </div>
 </aside>
@@ -218,8 +242,8 @@
 
 <script>
   (function () {
-    var url = 'http://yoursite.com/2019/09/01/DBMS/';
-    var banner = 'http://icanbecreative.com/resources/files/articles/40-high-resolution-wallpapers-for-minimalist-lovers/sources/banana-moon-minimalist-wallpaper-dark2.png'
+    var url = 'http://yoursite.com/2019/09/10/Hadoop/';
+    var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
         'background-image': 'url(' + banner + ')'

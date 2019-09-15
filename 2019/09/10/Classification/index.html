@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="YangXueya&#39;s blog">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      Data Mining (3)-- Classification | YangXueya
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    <script src="/js/qrious.js"></script>
+  
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>YangXueya</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>Data Mining (3)-- Classification</h2>
+  <p class="post-date">2019-09-10</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>Generally, there are three mainstream algorithms Decision Tree, Bayes, SVM to handle classification problems. In the blog, I will introduce procedure of build dicision tree and issues related to it.</p>
+<p><strong>General approach to the classification problem:</strong></p>
+<p>1) Prepare a dataset of labeled records</p>
+<p>2) Draw a random sample(e.g., 80%), call it training set.</p>
+<p>3) Use the training set to train a classifier</p>
+<p>4) Apply the classifier to the rest of the records to evaluate the accuracy of the classifier</p>
+<p>5) During the training phase, the classifier is fed with labeled records, the learning is called supervised learning.</p>
+<h3 id="1-Decision-Tree-Classifier"><a href="#1-Decision-Tree-Classifier" class="headerlink" title="1. Decision-Tree Classifier"></a>1. Decision-Tree Classifier</h3><h5 id="Why-Decision-Tree？"><a href="#Why-Decision-Tree？" class="headerlink" title="Why Decision Tree？"></a>Why Decision Tree？</h5><ol>
+<li>Decision tress often mimic the human level thinking so its so simple to understand the data and make some good interpretations.</li>
+<li>Decision trees actually make you see the logic for the data to interpret(not like black box algorithms like SVM,NN,etc..)</li>
+</ol>
+<p>When build decision-tree classifier, we assume that attributes are all nominal( they only take on a finite set of named values). Numeric attributes can be mapped to nominal attributes by discretization or binning.</p>
+<p>A decision tree is a tree structure of which:</p>
+<ul>
+<li>Each internal node denotes a <strong>test</strong> on an attributes</li>
+<li>Each branch from a node represents an outcome of a test</li>
+<li>Each leaf node is associate with a class label</li>
+</ul>
+<h5 id="Entropy"><a href="#Entropy" class="headerlink" title="Entropy"></a>Entropy</h5><p>Consider an information source which sends a stream of symbols(‘a’ or ‘b’) to a recipient.</p>
+<p><img src="/2019/09/10/Classification/Entropy.png" alt="Entropy"></p>
+<p>How certain is the recipient in predicting the next symbol the information source would send?</p>
+<p>It depends on the probabilities with which the source sends the symbols.</p>
+<ul>
+<li>If the source sends ‘a’ and ‘b’ with the equal probability, then the recipient is very umcertaion</li>
+<li>source always sends ‘a’ and not ‘b’, then the recipient is very certain</li>
+<li>if the source sends ‘a’ with a probability of 0.9, and sends ‘b’ with a probability of 0.1, then the recipient is pretty certain</li>
+</ul>
+<p>Entropy is a quantitative measure of uncertainty or randomness. </p>
+<p>According to Shannon, the entropy of an information source, S, is defined as:</p>
+<p><img src="/2019/09/10/Classification/Entr.png" alt="Formula"></p>
+<p>where pi is the probability that the i-th symbol occurs.</p>
+<p>The larger the entropy is, the higher uncertainty</p>
+<ul>
+<li><p>‘a’ (0.5), ‘b’ (0.5) </p>
+<p>entropy = 0.5 * log2 (1/0.5) + 0.5 * log2 (1/0.5) = 1(<strong>Very uncertain</strong>)</p>
+</li>
+<li><p>‘a’ (1.0), ‘b’ (0.0)</p>
+<p>entropy = 1.0 * log2 (1/1.0) = 0(<strong>Very Certain</strong>)</p>
+</li>
+<li><p>‘a’ (0.9), ‘b’ (0.1) </p>
+<p>entropy = 0.9 * log2 (1/0.9) + 0.1 * log2 (1/0.1) = 0.469(<strong>A bit uncertain</strong>)</p>
+</li>
+</ul>
+<p>The concept is used to select the tests used in a decision tree.</p>
+<h5 id="How-good-is-a-test"><a href="#How-good-is-a-test" class="headerlink" title="How good is a test?"></a>How good is a test?</h5><p>Measures include:</p>
+<ol>
+<li><p>Information Gain</p>
+<p><img src="/2019/09/10/Classification/Gain.png" alt="Information Gain"></p>
+<p>Information Gain is the entropy reduce after the split. <strong>Decision Trees</strong> algorithm will always tries to maximize <strong>Information gain</strong>. An <strong>attribute</strong> with highest <strong>Information gain</strong> will be considered as a best test and will be tested first.</p>
+<p>Consider a dataset with 5000 class a, and 5000 class b. The current Entropy=0.5*log<sub>2</sub>(1/0.5)+0.5*log<sub>2</sub>(0.5)=1</p>
+<p>After using a test Test1, there are 3000 a in the left subtree, while 2000 a and 5000 b in the right. Like the picture showing below:</p>
+<p><img src="/2019/09/10/Classification/Test1.png" alt="Test1"></p>
+<p>Therefore, the Test1’s conditional entropy is :</p>
+<p>Entropy=0.3*(1*log<sub>2</sub>1)+0.7*(2/7*log<sub>2</sub>(7/2) + 5/7*log(7/5))=0.863</p>
+<p>The information gain is 1(before)-0.863(after)=0.137.</p>
+<p>Consider another test Test2, after using Test2, we get the classification showing below:</p>
+<p><img src="/2019/09/10/Classification/Test2.png" alt="Test2"></p>
+<p>The conditional entropy of Test2 is 0, information gain is 1(before)-0(after) = 1. Therefore, we use Test2 as our test.</p>
+</li>
+</ol>
+<h5 id="Build-a-Decision-Tree"><a href="#Build-a-Decision-Tree" class="headerlink" title="Build a Decision Tree"></a>Build a Decision Tree</h5><p>Based on the concept of test and entropy, call our algorithm build-tree(D,L) where </p>
+<ul>
+<li>D is the training set of data records</li>
+<li>L is a list of nominal attributes</li>
+</ul>
+<p>We want to build a decision tree recursively using tests on attributes values.</p>
+<p><strong>Stop condition:</strong></p>
+<p>If …</p>
+<ol>
+<li>all records in D are of the same label K, build-tree(D,L) returns a tree with only one leaf node labeled K</li>
+<li>L is empty=&gt; no tests could be derived, build-tree(D,L) returns a tree with only a leaf node labeled M, where M = most common label among the records in D</li>
+<li>all records in D shares the same attribute for all attributes in L=&gt; no meaning test could be derived,build-tree(D,L) returns a tree with only a leaf node labeled M, where M = most common label among the records in D</li>
+</ol>
+<p>Otherwise…</p>
+<p>1) Compute the most effective(i.e., most entropy reducing) test that can be derived from the attributes in L.</p>
+<p>2) Using the Test divides D into m groups: D<sub>1</sub>…D<sub>m</sub></p>
+<p>3) Create a node labeled “A=?”</p>
+<p>4) For each group D<sub>i</sub>,</p>
+<p>​    if D<sub>i</sub> is empty, create a subtree T<sub>i</sub> with a lone leaf node with the most common label among the records in D.</p>
+<p>​    else:</p>
+<p>​      Recursively call build-tree(D<sub>i</sub>,L-{A}) to build subtree T<sub>i</sub></p>
+<h3 id="2-Classification-Issues"><a href="#2-Classification-Issues" class="headerlink" title="2. Classification Issues"></a>2. Classification Issues</h3><ol>
+<li>How to derive a test based on an attribute?</li>
+<li>How to measure the purity (certainty, uncertainty) of a dataset?</li>
+<li>How to measure the performance of a classifier</li>
+<li>Getting a (training set, test set) pair</li>
+<li>Training error vs. Generalization error</li>
+<li>Overfitting and underfitting</li>
+</ol>
+<h5 id="1-How-to-derive-a-test"><a href="#1-How-to-derive-a-test" class="headerlink" title="1. How to derive a test?"></a>1. How to derive a test?</h5><p>Derive test depends on attribute types(Nominal, Ordinal, and Continuous(numerical) ) and number of ways to split(2-way split, Multi-way split).</p>
+<p><strong>Splitting for Nominal and Ordinal Attributes:</strong></p>
+<ul>
+<li><p>Multi-way split: Use as many partitions as distinct values.</p>
+<p><img src="/2019/09/10/Classification/Multi.png" alt="Multi"></p>
+</li>
+<li><p>Binary split: Divides values into two subsets.</p>
+<p><img src="/2019/09/10/Classification/Binary.png" alt="Binary"></p>
+</li>
+</ul>
+<p><strong>Splitting for Continuous Attributes</strong></p>
+<ul>
+<li><p>Discretization: transform it to an ordinal attribute </p>
+</li>
+<li><p>Binary Decision: (A &lt; v) or (A &gt;= v )  </p>
+<ul>
+<li>consider all possible splits and finds the best cut</li>
+<li>more computationally expensive</li>
+</ul>
+</li>
+<li><p>Multiway split can be achieved by a number of binary splits.</p>
+<p><img src="/2019/09/10/Classification/Num.png" alt="Multi"></p>
+</li>
+</ul>
+<h5 id="2-Impurity-measures"><a href="#2-Impurity-measures" class="headerlink" title="2. Impurity measures"></a>2. Impurity measures</h5><ol>
+<li><p><strong>GINI(CART)</strong></p>
+<p><img src="/2019/09/10/Classification/GINI.png" alt="GINI"></p>
+<ul>
+<li>Maximum (1 - 1/nc), where nc is the number of classes</li>
+<li>Minimum (0.0) when all records belong to one class</li>
+</ul>
+</li>
+<li><p><strong>Information Gain (ID3)</strong></p>
+<p>Disadvantage: Tends to prefer splits that result in large number of partitions, each being small but pure.</p>
+</li>
+<li><p><strong>Gain Ratio</strong> <strong>(C4.5 )</strong></p>
+<p><img src="/2019/09/10/Classification/Ratio.png" alt="Gain ratio"></p>
+<p>Where</p>
+<p><img src="/2019/09/10/Classification/Info.png" alt="SplitInfo"></p>
+<p>ni is the number of records in partition i</p>
+<p>Gain ratio is designed to overcome the disadvantage of Information Gain.</p>
+<p>Adjusts Information Gain by the entropy of the partitioning (SplitINFO). Higher entropy partitioning (large number of small partitions) is penalized!</p>
+</li>
+</ol>
+<h5 id="3-Evaluating-Classifiers"><a href="#3-Evaluating-Classifiers" class="headerlink" title="3. Evaluating Classifiers"></a>3. Evaluating Classifiers</h5><p> Confusion Matrix:</p>
+<p><img src="/2019/09/10/Classification/Accuracy.png" alt="Matrix"></p>
+<ul>
+<li>a: TP (true positive) </li>
+<li>b: FN (false negative) </li>
+<li>c: FP (false positive) </li>
+<li>d: TN (true negative)</li>
+</ul>
+<p><img src="/2019/09/10/Classification/ACC.png" alt="Acc"></p>
+<p>Error rate=1-Accuracy</p>
+<p>The simple “accuracy” measure may be misleading especially when the classes are “imbalanced”.</p>
+<p>Therefore, other metrics are also used. Assume there are two class labels:</p>
+<ul>
+<li><strong>precision</strong>=TP/(TP+FP): The fraction of “positive class predictions” that are truly positives.</li>
+<li><strong>recall</strong>=TP/(TP+FN): The fraction of “positives” that are predicted positives.</li>
+<li><strong>F measure</strong> = (2 * precision * recall) / (precision + recall)</li>
+</ul>
+<h5 id="4-Getting-a-training-set-test-set-pair"><a href="#4-Getting-a-training-set-test-set-pair" class="headerlink" title="4.Getting a (training set, test set) pair"></a>4.Getting a (training set, test set) pair</h5><p><strong>1) Holdout Method</strong></p>
+<p>Given a set of N labeled records (examples) ,reserve 2/3 for training and 1/3 for testing</p>
+<p>Limitations </p>
+<ul>
+<li>fewer labeled examples available for training </li>
+<li>Larger training set =&gt; more accurate model built, but fewer test examples to give a good accuracy evaluation … (and vise versa)</li>
+</ul>
+<p><strong>2) Random subsampling</strong></p>
+<p>Random subsampling is repeated holdout. It repeat experiment k times, each with a different sample of each data as holdout.</p>
+<p>Classifier’s accuracy=average accuracy of classifier on samples.</p>
+<p>Limitations: Some records may be used more often than others in training/testing.</p>
+<p><strong>3) Cross-validation</strong></p>
+<p>k-fold cross-validation:</p>
+<ul>
+<li>Divide the examples into k partitions </li>
+<li>Run classifier by using k-1 partitions as training data and one partition as test data</li>
+<li>Repeat for all combinations of k-1 partitions and measure average accuracy</li>
+</ul>
+<p><strong>4) Bootstrap approach</strong></p>
+<p>Sample with placement. An N-sized sample contains 63.2% of data as training dataset,Prob. an example is selected (for large N): </p>
+<p><img src="/2019/09/10/Classification/boot.png" alt="bootstrap"></p>
+<p>Records not included in the bootstrap become the test set. Repeat b times and compute average accuracy</p>
+<h5 id="5-Training-error-vs-Generalization-error"><a href="#5-Training-error-vs-Generalization-error" class="headerlink" title="5. Training error vs. Generalization error"></a>5. Training error vs. Generalization error</h5><p>Given a training set X, we derive a model M. </p>
+<p><strong>Training error:</strong> We can apply the model M on X and measure the error of the model in classifying X’s records: the error is called training error e<sub>X</sub>.</p>
+<p><strong>Test error:</strong> We can apply the model Mon a test set Y  The error is called test error e<sub>Y</sub></p>
+<p><strong>Generation error(e<sub>G</sub>):</strong> expected error when M is applied to a future unseen record.</p>
+<p>In general: e<sub>G</sub>&gt;e<sub>X</sub></p>
+<h5 id="6-Overfitting-and-underfitting"><a href="#6-Overfitting-and-underfitting" class="headerlink" title="6. Overfitting and underfitting"></a>6. Overfitting and underfitting</h5><p>When we build M, we aim at reducing the impurity of a tree node. Essentially, we are building an Mthat reduces e<sub>X</sub>. Mmay be fitting the training set too well that it becomes too specific to the training set. This issue is called model <strong>overfitting</strong>.</p>
+<p>Overfitting results in decision trees that are more complex than necessary.Training error no longer provides a good estimate of how well the tree will perform on future unseen records.</p>
+<p>If the model M is too simple, then it probably won’t fit even the training set. This is called model <strong>underfitting</strong></p>
+<p><strong>7. Handling overfitting</strong></p>
+<h6 id="1-Pre-Pruning-Early-stopping-rule"><a href="#1-Pre-Pruning-Early-stopping-rule" class="headerlink" title="1) Pre-Pruning(Early stopping rule)"></a>1) Pre-Pruning(Early stopping rule)</h6><p>The principle of pre-pruning is stop the algorithm before it becomes a fully-grown tree.</p>
+<p>Typically stopping condition for a node is: 1) stop if all instances belong to the same class, 2) stop if all sttributes are the same.</p>
+<p>Pre-pruning using more restrictive conditions, 3) stop if number of instances is less than some user-specified threshold 4) Stop if expanding the current node does not improve impurity measures by much.</p>
+<h6 id="2-Post-pruning"><a href="#2-Post-pruning" class="headerlink" title="2) Post-pruning"></a>2) Post-pruning</h6><p>Let the tree grow to its entirety, and trim the nodes of the decision tree in a bottom-up fashion.</p>
+<h3 id="3-Advantage-and-Disadvantage"><a href="#3-Advantage-and-Disadvantage" class="headerlink" title="3.Advantage and Disadvantage"></a>3.Advantage and Disadvantage</h3><p><strong>Advantages:</strong> </p>
+<ul>
+<li>Non-parametric </li>
+<li>Inexpensive to construct </li>
+<li>Extremely fast at classifying unknown records </li>
+<li>Easy to interpret small-sized trees </li>
+<li>Accuracy is comparable to other classification techniques for many simple data sets</li>
+</ul>
+<p><strong>Disadvantages:</strong></p>
+<ul>
+<li>Subject to overfitting </li>
+<li>Decision boundaries are only rectilinear</li>
+</ul>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#Data Mining" >
+    <span class="tag-code">Data Mining</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/09/10/Hadoop/">
+        <span class="nav-arrow">← </span>
+        
+          Hadoop
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-Decision-Tree-Classifier"><span class="toc-nav-text">1. Decision-Tree Classifier</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#Why-Decision-Tree？"><span class="toc-nav-text">Why Decision Tree？</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#Entropy"><span class="toc-nav-text">Entropy</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#How-good-is-a-test"><span class="toc-nav-text">How good is a test?</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#Build-a-Decision-Tree"><span class="toc-nav-text">Build a Decision Tree</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-Classification-Issues"><span class="toc-nav-text">2. Classification Issues</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#1-How-to-derive-a-test"><span class="toc-nav-text">1. How to derive a test?</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#2-Impurity-measures"><span class="toc-nav-text">2. Impurity measures</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#3-Evaluating-Classifiers"><span class="toc-nav-text">3. Evaluating Classifiers</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#4-Getting-a-training-set-test-set-pair"><span class="toc-nav-text">4.Getting a (training set, test set) pair</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#5-Training-error-vs-Generalization-error"><span class="toc-nav-text">5. Training error vs. Generalization error</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#6-Overfitting-and-underfitting"><span class="toc-nav-text">6. Overfitting and underfitting</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#1-Pre-Pruning-Early-stopping-rule"><span class="toc-nav-text">1) Pre-Pruning(Early stopping rule)</span></a></li><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#2-Post-pruning"><span class="toc-nav-text">2) Post-pruning</span></a></li></ol></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-Advantage-and-Disadvantage"><span class="toc-nav-text">3.Advantage and Disadvantage</span></a></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://yoursite.com/2019/09/10/Classification/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>

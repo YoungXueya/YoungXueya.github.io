@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="YangXueya&#39;s blog">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      Data Mining (2) --Data Preprocess | YangXueya
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    <script src="/js/qrious.js"></script>
+  
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>YangXueya</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>Data Mining (2) --Data Preprocess</h2>
+  <p class="post-date">2019-09-09</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p> Data preprocessing needs to integrate data into a data warehouse, clean the data, reduce the size of data and transform data into a format that is more suitabe for data mining.</p>
+<h3 id="1-Data-Cleaning"><a href="#1-Data-Cleaning" class="headerlink" title="1. Data Cleaning"></a>1. Data Cleaning</h3><ul>
+<li>to fill in missing data</li>
+<li>to resolve inconsistency </li>
+<li>to remove noisy data</li>
+</ul>
+<h3 id="2-Data-Reduction"><a href="#2-Data-Reduction" class="headerlink" title="2. Data Reduction"></a>2. Data Reduction</h3><p>Data reduction refers to wisely reducing the size of the dataset so that data mining algorithm could be executed more efficientlt. This process should be very carefully that the analytical results should not be affected too much.</p>
+<ul>
+<li><h6 id="Dimensinality-Reduction"><a href="#Dimensinality-Reduction" class="headerlink" title="Dimensinality Reduction"></a>Dimensinality Reduction</h6></li>
+<li><h6 id="Aggregation"><a href="#Aggregation" class="headerlink" title="Aggregation"></a>Aggregation</h6><p>Reduce the resolution (or granularity) of data by deriving summary statistics of raw data. Gouping all transactions of a busy stock market that occur in 10-second intervals would provide enough resolution for pattern analysis. This also provides a data smoothin effect.</p>
+<p><img src="/2019/09/09/PreProcess/Agg.png" alt="Aggregation"></p>
+</li>
+<li><h6 id="Generalization"><a href="#Generalization" class="headerlink" title="Generalization"></a>Generalization</h6><p> Reduce the cardinality of an attribute’s domain. Example, map the values of the attribute “age” into another attribute “age-group” which takes on one of the following values: “kids, teens, thirties, middle-ages, seniors”. </p>
+<p>Generalization may makes rules more concise and interpretable. Example: “People of age 11 like to play video game”-&gt; “Teens like to play video game”</p>
+</li>
+<li><h6 id="Sampling"><a href="#Sampling" class="headerlink" title="Sampling"></a><strong>Sampling</strong></h6><p>Sampling is the main technique employed for data selection because obtaining the entire set of data of interest is too expensive or time consuming.</p>
+<p>A sample is representative if it has approximately the same property as the original set of data.</p>
+<p>Types of Sampling:</p>
+<ul>
+<li><strong>Simple Random Sampling:</strong> Equal probability of selecting any particular object.</li>
+<li><strong>Sampling without replacement:</strong> As each object is selected, it is removed from the population</li>
+<li><strong>Sample with replacement:</strong> Objects are not removed from the population as they are selected for the smaple. The same object could be picked up more than once.</li>
+<li><strong>Stratified sampleing:</strong> Split the data into groups; then draw random samples from each group.</li>
+</ul>
+</li>
+</ul>
+<h5 id="2-1-Dimensinality-Reduction"><a href="#2-1-Dimensinality-Reduction" class="headerlink" title="2.1 Dimensinality Reduction"></a>2.1 Dimensinality Reduction</h5><p>  Typical data is high-dimensional but not all attributes are highly related to the model result. e.g. customer account number should not associated with any property of the customers. Therefore, removes attributes without much affecting the mining result. </p>
+<p>  Curve of Dimensionality : When dimensionality increases, data becomes increasingly sparse in the space that it occupies. Definitions of density and distance between points, which is critical for clustering and outlier detection, become less meaningful. </p>
+<p>  Purpose of dimenstionality reduction:</p>
+<ul>
+<li><p>Avoid curve of dimensionality.</p>
+</li>
+<li><p>Reduce amount of time and memory required by data mining algorithms</p>
+</li>
+<li><p>Easier interpretation, less complex rules.</p>
+<p>Techniques for dimensionality reduction:</p>
+</li>
+<li><h6 id="Feature-creation"><a href="#Feature-creation" class="headerlink" title="Feature creation"></a>Feature creation</h6><p>New attributes are derived from existing attributes. Example: using BMI to present height and weight.</p>
+</li>
+<li><h6 id="Correlation-analysis"><a href="#Correlation-analysis" class="headerlink" title="Correlation analysis"></a>Correlation analysis</h6><p>Use correlation measures the linear relationship between attributes. If they are highly related, could choose one to abandon </p>
+<p><img src="/2019/09/09/PreProcess/Correlation.png" alt="Correlation"></p>
+</li>
+<li><h6 id="Principal-components-analysis"><a href="#Principal-components-analysis" class="headerlink" title="Principal components analysis"></a>Principal components analysis</h6><p>Input: An n-dimensional dataset of objects</p>
+<p>Goal : Find a new set of dimensions that better captures the variability of data.</p>
+<ul>
+<li>First dimension should bcaptures as much variability as possible.</li>
+<li>Second dimension should be orthogonal to first and capture as mush as possible from the remaining variability.</li>
+<li>….</li>
+</ul>
+<p>Total variability is preserved but new attributes are uncorrelated.</p>
+<p><img src="/2019/09/09/PreProcess/PCA.png" alt="PCA"></p>
+</li>
+<li><h6 id="Feature-selection"><a href="#Feature-selection" class="headerlink" title="Feature selection."></a>Feature selection.</h6><p>Remove redundant and/or irrelevant features.</p>
+<ul>
+<li>Redundant features: duplicate much or all of the information contained in one or more other attributes.(e.g. purcashe price of a product and the amount of sales tax paid.)</li>
+<li>Irrelevant features: contains no information that is useful</li>
+</ul>
+<p>One could use several techniques to do feature selection:</p>
+<ul>
+<li>*<em>Brute-force: *</em>Try all possible feature subsets as input to data mining method.</li>
+<li><strong>Embedded approach:</strong> Feature selection occurs naturally as part of algorithm.</li>
+<li><strong>Filter approach:</strong> Features are selected before data mining algorithm is run</li>
+<li><strong>Wrapper approach:</strong> Use the output of a data mining algorithm as feedback tp revise the set of attributes used.</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-Data-Transaction"><a href="#3-Data-Transaction" class="headerlink" title="3. Data Transaction"></a>3. Data Transaction</h3><h6 id="Discretization-and-Binarization"><a href="#Discretization-and-Binarization" class="headerlink" title="Discretization and Binarization"></a>Discretization and Binarization</h6><p>Discretization: Convert a numerical atrribute into an ordinal/norminal attribute</p>
+<p>Binarization: The resulting attribute is binary.</p>
+<p>Why Discretization?</p>
+<p>Data are often given in the form of continuous values. If their number is huge, model buiding for such data can be difficult. Moreover, many daya mining algorithm operate only in discrete search or variable space(e.g. Decision tree).</p>
+<p>How Discretization?</p>
+<p>Discretztion can be performed with or without taking class information into account. This is the cretira of supervised and unsupervised Discretization.</p>
+<p>Unsupervised discretization define split points automatically according to data distribution.</p>
+<p><img src="/2019/09/09/PreProcess/Equal.png" alt="Unsupervised"></p>
+<p>In supervised discretization, class labels could be assigned to data to guide the discretization process.</p>
+<h6 id="Normalization"><a href="#Normalization" class="headerlink" title="Normalization"></a>Normalization</h6><p>Normalization is the process of converting numerical numbers to a common range(e.g.,[0,1])</p>
+<ul>
+<li><p>min-max normalization</p>
+<p><img src="/2019/09/09/PreProcess/min.png" alt="Min-max"></p>
+</li>
+<li><p>z-score normalization</p>
+<p><img src="/2019/09/09/PreProcess/zero.png" alt="Zero"></p>
+</li>
+<li><p>Decimal Scaling</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x'=x/<span class="number">10</span>^j</span><br></pre></td></tr></table></figure>
+
+<p>where j is the smallest integer such that max(|vi‘|)&lt;1.</p>
+</li>
+</ul>
+<h3 id="4-Similarity-and-Dissimilarity"><a href="#4-Similarity-and-Dissimilarity" class="headerlink" title="4. Similarity and Dissimilarity"></a>4. Similarity and Dissimilarity</h3><p><strong>Similarity</strong> is a numerical measure of how alike two data objects are. When they are similar, the similarity is higher but still in range[0,1].</p>
+<p><strong>Dissimilarity</strong>(distance measure) is numerical measure of how different two data objects are. The lower the dissimilarity, the alike two objects are. In a range of [0,very large)</p>
+<p><strong>Proximity</strong> refers to how “close” two objects are. It can be expressed by either similarity or dissimilarity.</p>
+<h5 id="Distance-measures-for-multi-dimensional-objects"><a href="#Distance-measures-for-multi-dimensional-objects" class="headerlink" title="Distance measures for multi-dimensional objects:"></a>Distance measures for multi-dimensional objects:</h5><p><strong>1. Manhattan Distance</strong></p>
+<p><img src="https://qph.fs.quoracdn.net/main-qimg-47b6af63ffc513006a81877b748828a5" alt="image"></p>
+<p><strong>2. Euclidean distance</strong></p>
+<p><img src="/2019/09/09/PreProcess/Eu.png" alt="Euclidean distance"></p>
+<p>Where n is the number of dimensions (attributes) and pk and qk are, respectively, the k-th attribute (component) of data objects p and q.</p>
+<p>Normalization is necessary is scales are different.</p>
+<p><strong>3. Minkowski Distance</strong></p>
+<p><img src="/2019/09/09/PreProcess/MinKow.png" alt="MinKowski"></p>
+<p>Minkowski distance(a.k.a Lp norm) is a generation of Euclidean distance.</p>
+<h5 id="Similarity-Between-Binary-Vector"><a href="#Similarity-Between-Binary-Vector" class="headerlink" title="Similarity Between Binary Vector"></a>Similarity Between Binary Vector</h5><p><strong>1. Simple Matching Coefficient</strong>  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SMC = number of matches / number of attributes </span><br><span class="line">    = (M11 + M00) / (M01 + M10 + M11 + M00)</span><br></pre></td></tr></table></figure>
+
+<p>Somple Matching is more suitable for symmetrical attributes. </p>
+<p><strong>2. Jaccard Coefficients</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">J = number of 1-matches / number of not-both-zero attributes</span><br><span class="line">  = (M11) / (M01 + M10 + M11)</span><br></pre></td></tr></table></figure>
+
+<p>Jaccard Coefficients only cares about atrributes that presents.More useful for asymmetrical attributes.</p>
+<p>M01 = the number of attributes where p was 0 and q was 1 </p>
+<p>M10 = the number of attributes where p was 1 and q was 0 </p>
+<p>M00 = the number of attributes where p was 0 and q was 0 </p>
+<p>M11 = the number of attributes where p was 1 and q was 1</p>
+<p><strong>3. Cosine Similarity</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cos( d1, d2 ) = (d1 • d2) / ||d1|| ||d2||</span><br></pre></td></tr></table></figure>
+
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#Data Mining" >
+    <span class="tag-code">Data Mining</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/09/08/MLBasic/">
+        <span class="nav-arrow">← </span>
+        
+          Data Mining (1)-- Basics
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2019/09/10/Hadoop/">
+        
+          Hadoop
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-Data-Cleaning"><span class="toc-nav-text">1. Data Cleaning</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-Data-Reduction"><span class="toc-nav-text">2. Data Reduction</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#Dimensinality-Reduction"><span class="toc-nav-text">Dimensinality Reduction</span></a></li><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#Aggregation"><span class="toc-nav-text">Aggregation</span></a></li><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#Generalization"><span class="toc-nav-text">Generalization</span></a></li><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#Sampling"><span class="toc-nav-text">Sampling</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#2-1-Dimensinality-Reduction"><span class="toc-nav-text">2.1 Dimensinality Reduction</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#Feature-creation"><span class="toc-nav-text">Feature creation</span></a></li><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#Correlation-analysis"><span class="toc-nav-text">Correlation analysis</span></a></li><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#Principal-components-analysis"><span class="toc-nav-text">Principal components analysis</span></a></li><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#Feature-selection"><span class="toc-nav-text">Feature selection.</span></a></li></ol></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-Data-Transaction"><span class="toc-nav-text">3. Data Transaction</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#Discretization-and-Binarization"><span class="toc-nav-text">Discretization and Binarization</span></a></li><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#Normalization"><span class="toc-nav-text">Normalization</span></a></li></ol></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#4-Similarity-and-Dissimilarity"><span class="toc-nav-text">4. Similarity and Dissimilarity</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#Distance-measures-for-multi-dimensional-objects"><span class="toc-nav-text">Distance measures for multi-dimensional objects:</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#Similarity-Between-Binary-Vector"><span class="toc-nav-text">Similarity Between Binary Vector</span></a></li></ol></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://yoursite.com/2019/09/09/PreProcess/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>
