@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="YangXueya&#39;s blog">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      Data Mining (4)-- Classification Part 2 | YangXueya
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    <script src="/js/qrious.js"></script>
+  
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>YangXueya</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>Data Mining (4)-- Classification Part 2</h2>
+  <p class="post-date">2019-09-17</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p> We have introduced Decision Tree classification. Decision Tree classification has has advantages like no parameters needed, inexpensive to construct and extremely fast at classifying unknown records and easy to interpret. But there are still some shortage of decision tree: overfitting and decision boundaries are only rectilinear.</p>
+<p>In this post, I will introduce other classification method like KNN(Kth nearest neighbor), Naive Bayes and SVM.</p>
+<h3 id="1-Kth-Nearest-Neighbor"><a href="#1-Kth-Nearest-Neighbor" class="headerlink" title="1. Kth Nearest Neighbor"></a>1. Kth Nearest Neighbor</h3><p>Basic idea of KNN is given an unlabeled record Y, find the records in the training set that are most similar to Y(the nearest neighbors) to infer the label of Y.</p>
+<div style="width: 200px"> ![KNN](KNN.png)</div>
+<img src="/2019/09/17/Bayes/KNN.png" width="50%" height="50%">
+
+<p>There are three things required for KNN classification: (1) The set of stored labeled records (2) Distance Metric to compute distance between records. (3) The value K, the number of nearest neighbors to retrieve.</p>
+<h5 id="1-To-classify-an-unknown-record"><a href="#1-To-classify-an-unknown-record" class="headerlink" title="(1) To classify an unknown record:"></a><strong>(1) To classify an unknown record:</strong></h5><ul>
+<li><p>First compute distance to other training records</p>
+<p>E.g. Euclidean distance.</p>
+</li>
+<li><p>Identify <em>k</em> nearest neighbors</p>
+</li>
+<li><p>Use label of the K nearest neighbors to determine the class label of the unknown label.</p>
+<p>(1) Take the majority vote of class labels among the k-nearest neighbors.</p>
+<p>(2) we can also use weight the votes according to neighbors’ distance. E.g. w=1/d<sup>2</sup></p>
+</li>
+</ul>
+<p>Attribute have to be normalized.</p>
+<h5 id="2-The-value-of-K"><a href="#2-The-value-of-K" class="headerlink" title="(2) The value of K"></a><strong>(2) The value of K</strong></h5><p>The value</p>
+<p>If K is too small, it will sensitive to noise point;</p>
+<p>If K is too large, neighborhood may include points from other classes</p>
+<p><img src="/2019/09/17/Bayes/valueK.png=200x" alt="ValueK"></p>
+<h5 id="3-Summary-of-KNN"><a href="#3-Summary-of-KNN" class="headerlink" title="(3) Summary of KNN"></a>(3) Summary of KNN</h5><ul>
+<li>k-NN classifiers are lazy learners, They don’t build model explicitly, this could avoid expensive model-building. But k-NN search could be expensive.</li>
+<li>Distance-based so it performs poorly in high-dimensional spaces.</li>
+<li>Feature selection is important.</li>
+</ul>
+<h3 id="2-Bayesian-Classifier"><a href="#2-Bayesian-Classifier" class="headerlink" title="2. Bayesian Classifier"></a>2. Bayesian Classifier</h3><h5 id="1-Bayes-Theorem"><a href="#1-Bayes-Theorem" class="headerlink" title="(1) Bayes Theorem"></a>(1) Bayes Theorem</h5><p>Given a hypothesis Hand an observation X, denote P(H|X) as the probability that the hypothesis H is true given X happens.</p>
+<p>Example: </p>
+<ul>
+<li>H = an object O is an apple </li>
+<li>X = an object O is red and round </li>
+<li>P(H|X) = prob. that an object O is an apple given that O is red and round</li>
+</ul>
+<p>Note that we can consider </p>
+<ul>
+<li>P(H) = probability that an arbitrary object is an apple </li>
+<li>P(X) = probability that an arbitrary object is red and round</li>
+<li>P(X|H) = probability that an object O is red and round given that O is an apple</li>
+<li>P(H|X) = probability that an object O is an apple given that O is red and round.</li>
+</ul>
+<p>From Bayes Theorem, we know that:</p>
+<ul>
+<li><p>P(H|X) = P(H,X) / P(X) </p>
+</li>
+<li><p>P(X|H) = P(H,X) / P(H) </p>
+</li>
+<li><p>P(H|X) = P(X|H) * P(H) / P(X)</p>
+</li>
+</ul>
+<h5 id="2-Applying-Bayes-theorem-to-classification"><a href="#2-Applying-Bayes-theorem-to-classification" class="headerlink" title="(2) Applying Bayes theorem to classification"></a>(2) Applying Bayes theorem to classification</h5><p>Given an unlabeled record r, we consider </p>
+<ul>
+<li>P(C1) = probability that a record should be labeled class C1</li>
+<li>P(X) = probability that a record shares r’s attribute values</li>
+<li>P(X|C1) = probability that a record shares r’s attribute values given that the record is labeled C1</li>
+<li>P(C1|X) = probability that a record is labeled C1 given that it shares r’s attribute values</li>
+</ul>
+<p>Suppose there are m class labels, we want to determine which class record r should belong, We need to compute P(C<sub>1</sub>|X), P(C<sub>2</sub>|X), …, P(C<sub>m</sub>|X) and pick the C<sub>i</sub> with highest probability.</p>
+<p>Note that P(C<sub>i</sub>|X)=P(X|C<sub>i</sub>)*P(C<sub>i</sub>)/P(X), P(X) is independent to class, we only needs to compare the value of P(X|C<sub>i</sub>)*P(C<sub>i</sub>).</p>
+<p><strong>P(C<sub>i</sub>) :</strong>  Given a training set D, we can estimate P(C<sub>i</sub>) by n<sub>i</sub>/N, where n<sub>i</sub> = the number of records in D of class C<sub>i</sub> and N =total number of records in D.</p>
+<p><strong>P(X|C<sub>i</sub>):</strong> It’s difficult to estimate. Naive Bayesian Classifier assumes that the values of the attributes are conditionally independent of one another. That is</p>
+<p><img src="/2019/09/17/Bayes/Bayes.png" alt="Bayes"></p>
+<p>x<sub>k</sub> = value of a record r for attribute k</p>
+<p>Therefore, the comparison is </p>
+<p><img src="/2019/09/17/Bayes/Comp.png" alt="Comp"></p>
+<h5 id="3-Naive-Bayes-Summary"><a href="#3-Naive-Bayes-Summary" class="headerlink" title="(3) Naive Bayes Summary"></a>(3) Naive Bayes Summary</h5><p>Navie Bayes is based on the statistics of the whole dataset, so, robust to isolated noise points. In contrast, kNN classifier depends only on a few data objects to make prediction, which makes it susceptible to noise. The “naive” of Naive Bayes is the independence assumption.</p>
+<h3 id="3-Support-Vector-Machines"><a href="#3-Support-Vector-Machines" class="headerlink" title="3. Support Vector Machines"></a>3. Support Vector Machines</h3><p>The basic idea of SVM is finding a linear hyperplane(decision boundary) with maximum the margin that will separate the data.</p>
+<h3 id="4-Ensamble-classifier"><a href="#4-Ensamble-classifier" class="headerlink" title="4. Ensamble classifier"></a>4. Ensamble classifier</h3><p>Construct a set of classifiers from the training data, Predict class label of previously unseen records by aggregating predictions made by multiple classifiers.</p>
+<p>General idea of Ensamble classifier is :</p>
+<p><img src="/2019/09/17/Bayes/RF.png" alt="Ensamble"></p>
+<p>So how to generate an ensamble of classifiers?</p>
+<ul>
+<li>Use different sets           =&gt; Bagging</li>
+<li>use different attributes sets for input               =&gt;combines  the first is Random Forest</li>
+<li>use different partitions of class labels</li>
+<li>use different learning algorithms.</li>
+</ul>
+<p>The efficiency of ensamble classifier relies on the independence of their result.</p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#Data Mining" >
+    <span class="tag-code">Data Mining</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2019/09/10/Classification/">
+        <span class="nav-arrow">← </span>
+        
+          Data Mining (3)-- Classification Part 1
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2019/09/18/Association1/">
+        
+          Data Mining (5)-- Association rule
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- No Comment -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-Kth-Nearest-Neighbor"><span class="toc-nav-text">1. Kth Nearest Neighbor</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#1-To-classify-an-unknown-record"><span class="toc-nav-text">(1) To classify an unknown record:</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#2-The-value-of-K"><span class="toc-nav-text">(2) The value of K</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#3-Summary-of-KNN"><span class="toc-nav-text">(3) Summary of KNN</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-Bayesian-Classifier"><span class="toc-nav-text">2. Bayesian Classifier</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#1-Bayes-Theorem"><span class="toc-nav-text">(1) Bayes Theorem</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#2-Applying-Bayes-theorem-to-classification"><span class="toc-nav-text">(2) Applying Bayes theorem to classification</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#3-Naive-Bayes-Summary"><span class="toc-nav-text">(3) Naive Bayes Summary</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-Support-Vector-Machines"><span class="toc-nav-text">3. Support Vector Machines</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#4-Ensamble-classifier"><span class="toc-nav-text">4. Ensamble classifier</span></a></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://yoursite.com/2019/09/17/Bayes/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>
