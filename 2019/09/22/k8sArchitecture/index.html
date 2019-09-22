@@ -10,7 +10,7 @@
   
   <title>
     
-      Data Mining (5)-- Association rule | YangXueya
+      Kubernetes(2)-Architecture | YangXueya
     
   </title>
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -140,8 +140,8 @@
 </header>
 
     <div id="article-banner">
-  <h2>Data Mining (5)-- Association rule</h2>
-  <p class="post-date">2019-09-18</p>
+  <h2>Kubernetes(2)-Architecture</h2>
+  <p class="post-date">2019-09-22</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -149,16 +149,51 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><p>Principal application of association rules is market basket analysis.  It models supermarket data and discovers associations between different products (or items) that are bought together by customers. E.g., {bread}=&gt;{milk}</p>
-<p>We consider a (market basket) dataset as a collection of transactions. Each transaction is represented by a set of items(e.g., {bread, milk, rice}). For binary association rules mining, the quantity of each item bought is not considered.</p>
+    <section class="markdown-content"><p><a href="https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/" target="_blank" rel="noopener">Kubernetes (K8s)</a> is an open-source system for automating deployment, scaling, and management of containerized applications.</p>
+<p>There are two roles in Kubernetes : Master and Worker Node.</p>
+<p><img src="/2019/09/22/k8sArchitecture/archi.png" alt="Architecture"></p>
+<h3 id="1-Master"><a href="#1-Master" class="headerlink" title="1. Master"></a>1. Master</h3><p>Master node provide the cluster’s control plane, make global decisions about the cluster, detect and respond to cluster events. </p>
+<p>Mast node managing the kubernetes cluster, storing information regarding to different worker nodes, planing which container to allocate and monitoring the nodes on the cluster</p>
+<p>Master node including the following conponents:</p>
+<ul>
+<li><h5 id="ETCD-Cluster"><a href="#ETCD-Cluster" class="headerlink" title="ETCD Cluster"></a><strong>ETCD Cluster</strong></h5><p>ETCD is a database that store information about the cluster in a key-value format. </p>
+</li>
+<li><h5 id="Kube-scheduler"><a href="#Kube-scheduler" class="headerlink" title="Kube-scheduler"></a><strong>Kube-scheduler</strong></h5><p>Kube-scheduler scheduling applications or containers on nodes. Kube-scheduler identifies the right node to place a container based on the containers resource requirement, worker node capacity or any other policies or constraints such as affinity and anti-affinity specifications.</p>
+</li>
+<li><h5 id="Kube-Controller-Manager"><a href="#Kube-Controller-Manager" class="headerlink" title="Kube-Controller-Manager"></a><strong>Kube-Controller-Manager</strong></h5><ul>
+<li><p><strong>Node-Controller</strong></p>
+<p>Node Controller take cares of nodes including onboarding of new nodes of the cluster, handling situations where nodes become unavaliable, get destroyed.</p>
+</li>
+<li><p><strong>Replication-Controller</strong></p>
+<p>Replication Controller ensures the number of container are running at all times in the cluster.</p>
+</li>
+<li><p><strong>Endpoint Controller</strong></p>
+<p>Populate the Endpoints object(that is, joins Services&amp; Pods)</p>
+</li>
+<li><p><strong>Service Account &amp; Token Controllers</strong></p>
+<p>Create default accounts and API access tokens for new n</p>
+</li>
+</ul>
+</li>
+<li><h5 id="Kube-apiserver"><a href="#Kube-apiserver" class="headerlink" title="Kube-apiserver"></a><strong>Kube-apiserver</strong></h5><p>Kube-APIserver is the primary management components of kubernetes cluster. Kube-APIserver is responsible for orchestrating all operations within the cluster. It exposes the kubernetes api which is used by external users to perform management operations on the cluster and various  controllers to monitoring the state of cluster and make necessary changes as required and by the worker to communicate with the server.</p>
+</li>
+</ul>
+<h3 id="2-Worker-Nodes"><a href="#2-Worker-Nodes" class="headerlink" title="2. Worker Nodes"></a>2. Worker Nodes</h3><ul>
+<li><h5 id="Kubelete"><a href="#Kubelete" class="headerlink" title="Kubelete"></a><strong>Kubelete</strong></h5><p>Kubelete is tan agent runs on each node in a cluster. It listens to the instructions from master node and deploys or destroys containers. The kube-apiserver in Master node periodically fetches status reports from Kubelete to monitor the status of nodes and containers on them. </p>
+</li>
+<li><h5 id="Kube-proxy"><a href="#Kube-proxy" class="headerlink" title="Kube-proxy"></a><strong>Kube-proxy</strong></h5><p>Conmunication between containers are enabled by Kube-proxy running on worker nodes</p>
+</li>
+<li><h5 id="Container-Runtime"><a href="#Container-Runtime" class="headerlink" title="Container Runtime"></a><strong>Container Runtime</strong></h5><p>The container runtime is the software that is responsible for running containers. Kubernetes supports several container runtimes: <a href="http://www.docker.com/" target="_blank" rel="noopener">Docker</a>, <a href="https://containerd.io/" target="_blank" rel="noopener">containerd</a>, <a href="https://cri-o.io/" target="_blank" rel="noopener">cri-o</a>, <a href="https://github.com/kubernetes-incubator/rktlet" target="_blank" rel="noopener">rktlet</a>, etc.</p>
+</li>
+</ul>
 </section>
     <!-- Tags START -->
     
       <div class="tags">
         <span>Tags:</span>
         
-  <a href="/tags#Data Mining" >
-    <span class="tag-code">Data Mining</span>
+  <a href="/tags#Cloud Computing" >
+    <span class="tag-code">Cloud Computing</span>
   </a>
 
       </div>
@@ -169,20 +204,13 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2019/09/17/Bayes/">
+      <a class="nav-left" href="/2019/09/21/Docker/">
         <span class="nav-arrow">← </span>
         
-          Data Mining (4)-- Classification Part 2
+          Kubernetes(1)-Container
         
       </a>
     
-    
-      <a class="nav-right" href="/2019/09/18/YangXueya/">
-        
-          Yang Xueya
-        
-        <span class="nav-arrow"> →</span>
-      </a>
     
   </div>
 
@@ -209,7 +237,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="nav">none</ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-Master"><span class="toc-nav-text">1. Master</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#ETCD-Cluster"><span class="toc-nav-text">ETCD Cluster</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#Kube-scheduler"><span class="toc-nav-text">Kube-scheduler</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#Kube-Controller-Manager"><span class="toc-nav-text">Kube-Controller-Manager</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#Kube-apiserver"><span class="toc-nav-text">Kube-apiserver</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-Worker-Nodes"><span class="toc-nav-text">2. Worker Nodes</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#Kubelete"><span class="toc-nav-text">Kubelete</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#Kube-proxy"><span class="toc-nav-text">Kube-proxy</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#Container-Runtime"><span class="toc-nav-text">Container Runtime</span></a></li></ol></li></ol></li></ol>
     
   </div>
 </aside>
@@ -219,7 +247,7 @@
 
 <script>
   (function () {
-    var url = 'http://yoursite.com/2019/09/18/Association1/';
+    var url = 'http://yoursite.com/2019/09/22/k8sArchitecture/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({

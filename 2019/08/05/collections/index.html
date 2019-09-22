@@ -153,11 +153,15 @@
 <table>
 <thead>
 <tr>
-<th><a href="https://docs.python.org/3/library/collections.html#collections.namedtuple" target="_blank" rel="noopener"><code>namedtuple()</code></a></th>
-<th>factory function for creating tuple subclasses with named fields</th>
+<th>Name</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody><tr>
+<td><a href="https://docs.python.org/3/library/collections.html#collections.namedtuple" target="_blank" rel="noopener"><code>namedtuple()</code></a></td>
+<td>factory function for creating tuple subclasses with named fields</td>
+</tr>
+<tr>
 <td><a href="https://docs.python.org/3/library/collections.html#collections.deque" target="_blank" rel="noopener"><strong><code>deque</code></strong></a></td>
 <td>list-like container with fast appends and pops on either end</td>
 </tr>
@@ -166,7 +170,7 @@
 <td>dict-like class for creating a single view of multiple mappings</td>
 </tr>
 <tr>
-<td><a href="https://docs.python.org/3/library/collections.html#collections.Counter" target="_blank" rel="noopener"><code>Counter</code></a></td>
+<td><a href="https://docs.python.org/3/library/collections.html#collections.Counter" target="_blank" rel="noopener"><strong><code>Counter</code></strong></a></td>
 <td>dict subclass for counting hashable objects</td>
 </tr>
 <tr>
@@ -190,7 +194,7 @@
 <td>wrapper around string objects for easier string subclassing</td>
 </tr>
 </tbody></table>
-<h3 id="deque"><a href="#deque" class="headerlink" title="deque"></a>deque</h3><p>collections.deque([iterable[,maxlen]]) returns a double-end queue. Deque is pronounced “deck” (short for “Double-ended queue”). The pop and append operation in deque requires only O(1) time. </p>
+<h3 id="1-deque"><a href="#1-deque" class="headerlink" title="1. deque"></a>1. deque</h3><p>collections.deque([iterable[,maxlen]]) returns a double-end queue. Deque is pronounced “deck” (short for “Double-ended queue”). The pop and append operation in deque requires only O(1) time. </p>
 <p>If maxlen in deque is not specified, deque could append as many items as user want. Otherwise, the element in the other side of append will be evicted. </p>
 <p>Deque is a good datatype for BFS. <a href="https://github.com/YoungXueya/LeetcodeSolution/blob/5b2eb2685dc0a70355f0b16213f55bd0539c5cdd/src/107.%20Binary%20Tree%20Level%20Order%20Traversal%20II.py" target="_blank" rel="noopener">Here</a> is an example.</p>
 <p>Duque support the following methods:</p>
@@ -214,7 +218,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="keyword">import</span> collections <span class="keyword">as</span> co</span><br><span class="line">&gt;&gt;&gt;d=co.deque()</span><br><span class="line">&gt;&gt;&gt;a.append(<span class="number">1</span>)</span><br><span class="line">&gt;&gt;&gt;a.appendleft(<span class="number">2</span>)</span><br><span class="line">&gt;&gt;&gt;a.append(<span class="number">3</span>)</span><br><span class="line">...</span><br><span class="line">&gt;&gt;&gt;a</span><br><span class="line">deque([<span class="number">2</span>, <span class="number">4</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">3</span>])</span><br><span class="line">&gt;&gt;&gt;a.index(<span class="number">1</span>)</span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.index(<span class="number">1</span>,<span class="number">4</span>,len(a))</span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.popleft()</span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.pop()</span><br><span class="line"><span class="number">3</span></span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt; a</span><br><span class="line">deque([<span class="number">4</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.rotate(<span class="number">2</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">deque([<span class="number">1</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">2</span>])</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li><h3 id="OrderedDict-objects"><a href="#OrderedDict-objects" class="headerlink" title="OrderedDict objects"></a>OrderedDict objects</h3></li>
+<li><h3 id="2-OrderedDict-objects"><a href="#2-OrderedDict-objects" class="headerlink" title="2. OrderedDict objects"></a>2. OrderedDict objects</h3></li>
 </ul>
 <p>Same as regular dictionaries but have some extra capabilities relating to ordering operations.</p>
 <p>Comparison of dict and OrderedDict</p>
@@ -238,7 +242,7 @@
 </li>
 </ul>
 <p>In addition to the usual mapping methods, ordered dictionaries also support reverse iteration using <a href="https://docs.python.org/3/library/functions.html#reversed" target="_blank" rel="noopener"><code>reversed()</code></a>.</p>
-<p><em>Shallow copy:</em> Shallow copy constructs a new compound object and then (to the extent possible) inserts <em>references</em> into it to the objects found in the original.</p>
+<h3 id="3-Counter"><a href="#3-Counter" class="headerlink" title="3. Counter"></a>3. Counter</h3><p><em>Shallow copy:</em> Shallow copy constructs a new compound object and then (to the extent possible) inserts <em>references</em> into it to the objects found in the original.</p>
 </section>
     <!-- Tags START -->
     
@@ -297,7 +301,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#deque"><span class="toc-nav-text">deque</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#OrderedDict-objects"><span class="toc-nav-text">OrderedDict objects</span></a></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-deque"><span class="toc-nav-text">1. deque</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-OrderedDict-objects"><span class="toc-nav-text">2. OrderedDict objects</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-Counter"><span class="toc-nav-text">3. Counter</span></a></li></ol>
     
   </div>
 </aside>

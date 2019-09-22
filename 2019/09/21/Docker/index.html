@@ -10,7 +10,7 @@
   
   <title>
     
-      Data Mining (5)-- Association rule | YangXueya
+      Kubernetes(1)-Container | YangXueya
     
   </title>
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -140,8 +140,8 @@
 </header>
 
     <div id="article-banner">
-  <h2>Data Mining (5)-- Association rule</h2>
-  <p class="post-date">2019-09-18</p>
+  <h2>Kubernetes(1)-Container</h2>
+  <p class="post-date">2019-09-21</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -149,16 +149,48 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><p>Principal application of association rules is market basket analysis.  It models supermarket data and discovers associations between different products (or items) that are bought together by customers. E.g., {bread}=&gt;{milk}</p>
-<p>We consider a (market basket) dataset as a collection of transactions. Each transaction is represented by a set of items(e.g., {bread, milk, rice}). For binary association rules mining, the quantity of each item bought is not considered.</p>
+    <section class="markdown-content"><h3 id="1-What-is-Container？"><a href="#1-What-is-Container？" class="headerlink" title="1. What is Container？"></a>1. What is Container？</h3><p>Difference between traditional operating system and container technology.</p>
+<p><img src="/2019/09/21/Docker/Container.png" alt="Container"></p>
+<h5 id="1-1-Process-management-in-traditional-operating-system’s"><a href="#1-1-Process-management-in-traditional-operating-system’s" class="headerlink" title="1.1 Process management in traditional operating system’s"></a>1.1 Process management in traditional operating system’s</h5><p>(1) Processes could communicate with each other. =&gt; Process with higher priority could attack other processes</p>
+<p>(2) Processes shares one file system and could modify one same file. =&gt;a. dependence of different process may conflict b. Process with higher priority may delete files needed by other processes</p>
+<p>(3) Processes shares the resources(e.g. Network, CPU, Memory). =&gt; resource competition. </p>
+<h5 id="1-2-Container"><a href="#1-2-Container" class="headerlink" title="1.2 Container"></a>1.2 Container</h5><p>A container is a standard unit of software that packages up code and all its dependencies so the application runs quickly and reliably from one computing environment to another. </p>
+<p>(1) Independent file system - chroot</p>
+<p>(2) Resource view isolation(Could communicate with part of the processes) - namespace</p>
+<p>(3) Resource usage management - cgroup</p>
+<h3 id="2-Image"><a href="#2-Image" class="headerlink" title="2. Image"></a>2. Image</h3><p>Image are file set needed to run a container. Container is an instance of image. Image is known as “build once, use anywhere”</p>
+<p>Dockerfile describes the steps to build an image.</p>
+<p><img src="/2019/09/21/Docker/Image.png" alt="Image"></p>
+<p>Properties of image:</p>
+<ul>
+<li><strong>Base Image:</strong> image built from scratch and other images could extend based on base image.</li>
+<li><strong>Layering:</strong> Build one image based on the base image</li>
+<li><strong>Reuse:</strong> Components reuse. If base image already in disk, don’t need to download from remote anymore.</li>
+</ul>
+<p>Advantage of Layering and Reuse:</p>
+<p><strong>(1) Improve downloading efficiency:</strong> Components from different layers could be downloaded in parallel. Components already in the disk don’t require redownload.</p>
+<p><strong>(2) Reduce disk usage:</strong> once one layer(e.g. base image) downloaded from remote, it could be shared by all images.</p>
+<h3 id="3-How-to-run-a-container"><a href="#3-How-to-run-a-container" class="headerlink" title="3. How to run a container?"></a>3. How to run a container?</h3><p><img src="/2019/09/21/Docker/pro.png" alt="Procedure"></p>
+<p><strong>Step1.</strong> Pull image from registry: docker pull <em>imageName:version</em></p>
+<p><strong>Step2.</strong> Show local image list: docker images</p>
+<p><strong>Step3.</strong> Select the docker and run: docker run -name containerName <em>imageName:version</em></p>
+<h3 id="4-Container-VS-Virtual-Machine"><a href="#4-Container-VS-Virtual-Machine" class="headerlink" title="4.Container VS Virtual Machine"></a>4.Container VS Virtual Machine</h3><p><img src="/2019/09/21/Docker/VM.png" alt="VM"></p>
+<h5 id="4-1-Virtual-Machine"><a href="#4-1-Virtual-Machine" class="headerlink" title="4.1 Virtual Machine"></a>4.1 Virtual Machine</h5><p>(1) VM is achieved by hardware-level virtualization. </p>
+<p>(2) Within each virtual machine runs a unique guest operating system. VMs with different operating systems can run on the same physical server.</p>
+<p>(3) Application in a VM owns all the resource of the guest OS. VM has higher isolation level.</p>
+<p>(4) Because of each VM has its own operating system, the default size of a VM can reach several GBs. </p>
+<h5 id="4-2-Container"><a href="#4-2-Container" class="headerlink" title="4.2 Container"></a>4.2 Container</h5><p>(1) Container technology is OS-level virtualization.</p>
+<p>(2) Container has no guest OS. It’s process-level isolation.</p>
+<p>(3) Containers are very “light”, they are only MB in size. It only takes seconds to start.</p>
+<p>Container are going to a higher-level isolation direction.</p>
 </section>
     <!-- Tags START -->
     
       <div class="tags">
         <span>Tags:</span>
         
-  <a href="/tags#Data Mining" >
-    <span class="tag-code">Data Mining</span>
+  <a href="/tags#Cloud Computing" >
+    <span class="tag-code">Cloud Computing</span>
   </a>
 
       </div>
@@ -169,17 +201,17 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2019/09/17/Bayes/">
+      <a class="nav-left" href="/2019/09/18/YangXueya/">
         <span class="nav-arrow">← </span>
         
-          Data Mining (4)-- Classification Part 2
+          Yang Xueya
         
       </a>
     
     
-      <a class="nav-right" href="/2019/09/18/YangXueya/">
+      <a class="nav-right" href="/2019/09/22/k8sArchitecture/">
         
-          Yang Xueya
+          Kubernetes(2)-Architecture
         
         <span class="nav-arrow"> →</span>
       </a>
@@ -209,7 +241,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="nav">none</ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-What-is-Container？"><span class="toc-nav-text">1. What is Container？</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#1-1-Process-management-in-traditional-operating-system’s"><span class="toc-nav-text">1.1 Process management in traditional operating system’s</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#1-2-Container"><span class="toc-nav-text">1.2 Container</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-Image"><span class="toc-nav-text">2. Image</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-How-to-run-a-container"><span class="toc-nav-text">3. How to run a container?</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#4-Container-VS-Virtual-Machine"><span class="toc-nav-text">4.Container VS Virtual Machine</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#4-1-Virtual-Machine"><span class="toc-nav-text">4.1 Virtual Machine</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#4-2-Container"><span class="toc-nav-text">4.2 Container</span></a></li></ol></li></ol></li></ol>
     
   </div>
 </aside>
@@ -219,7 +251,7 @@
 
 <script>
   (function () {
-    var url = 'http://yoursite.com/2019/09/18/Association1/';
+    var url = 'http://yoursite.com/2019/09/21/Docker/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
