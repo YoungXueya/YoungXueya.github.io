@@ -10,7 +10,7 @@
   
   <title>
     
-      Kubernetes(2)-Architecture | YangXueya
+      Kubernetes(3)-Pods Create and Configuration | YangXueya
     
   </title>
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -140,8 +140,8 @@
 </header>
 
     <div id="article-banner">
-  <h2>Kubernetes(2)-Architecture</h2>
-  <p class="post-date">2019-09-22</p>
+  <h2>Kubernetes(3)-Pods Create and Configuration</h2>
+  <p class="post-date">2019-09-27</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -149,46 +149,43 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><p><a href="https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/" target="_blank" rel="noopener">Kubernetes (K8s)</a> is an open-source system for automating deployment, scaling, and management of containerized applications.</p>
-<p>There are two roles in Kubernetes : Master and Worker Node.</p>
-<p><img src="/2019/09/22/k8sArchitecture/archi.png" alt="Architecture"></p>
-<h3 id="1-Master"><a href="#1-Master" class="headerlink" title="1. Master"></a>1. Master</h3><p>Master node provide the cluster’s control plane, make global decisions about the cluster, detect and respond to cluster events. </p>
-<p>Mast node managing the kubernetes cluster, storing information regarding to different worker nodes, planing which container to allocate and monitoring the nodes on the cluster</p>
-<p>Master node including the following conponents:</p>
-<ul>
-<li><h5 id="ETCD-Cluster"><a href="#ETCD-Cluster" class="headerlink" title="ETCD Cluster"></a><strong>ETCD Cluster</strong></h5><p>ETCD is a database that store information about the cluster in a key-value format. </p>
-</li>
-<li><h5 id="Kube-scheduler"><a href="#Kube-scheduler" class="headerlink" title="Kube-scheduler"></a><strong>Kube-scheduler</strong></h5><p>Kube-scheduler scheduling applications or containers on nodes. Kube-scheduler identifies the right node to place a container based on the containers resource requirement, worker node capacity or any other policies or constraints such as affinity and anti-affinity specifications.</p>
-</li>
-<li><h5 id="Kube-Controller-Manager"><a href="#Kube-Controller-Manager" class="headerlink" title="Kube-Controller-Manager"></a><strong>Kube-Controller-Manager</strong></h5><ul>
-<li><p><strong>Node-Controller</strong></p>
-<p>Node Controller take cares of nodes including onboarding of new nodes of the cluster, handling situations where nodes become unavaliable, get destroyed.</p>
-</li>
-<li><p><strong>Replication-Controller</strong></p>
-<p>Replication Controller ensures the number of container are running at all times in the cluster.</p>
-</li>
-<li><p><strong>Endpoint Controller</strong></p>
-<p>Populate the Endpoints object(that is, joins Services&amp; Pods)</p>
-</li>
-<li><p><strong>Service Account &amp; Token Controllers</strong></p>
-<p>Create default accounts and API access tokens for new n</p>
-</li>
-</ul>
-</li>
-<li><h5 id="Kube-apiserver"><a href="#Kube-apiserver" class="headerlink" title="Kube-apiserver"></a><strong>Kube-apiserver</strong></h5><p>Kube-APIserver is the primary management components of kubernetes cluster. Kube-APIserver is responsible for orchestrating all operations within the cluster. It exposes the kubernetes api which is used by external users to perform management operations on the cluster and various  controllers to monitoring the state of cluster and make necessary changes as required and by the worker to communicate with the server.</p>
-</li>
-</ul>
-<h3 id="2-Worker-Nodes"><a href="#2-Worker-Nodes" class="headerlink" title="2. Worker Nodes"></a>2. Worker Nodes</h3><ul>
-<li><h5 id="Kubelete"><a href="#Kubelete" class="headerlink" title="Kubelete"></a><strong>Kubelete</strong></h5><p>Kubelete is tan agent runs on each node in a cluster. It listens to the instructions from master node and deploys or destroys containers. The kube-apiserver in Master node periodically fetches status reports from Kubelete to monitor the status of nodes and containers on them. </p>
-</li>
-<li><h5 id="Kube-proxy"><a href="#Kube-proxy" class="headerlink" title="Kube-proxy"></a><strong>Kube-proxy</strong></h5><p>Conmunication between containers are enabled by Kube-proxy running on worker nodes</p>
-</li>
-<li><h5 id="Container-Runtime"><a href="#Container-Runtime" class="headerlink" title="Container Runtime"></a><strong>Container Runtime</strong></h5><p>The container runtime is the software that is responsible for running containers. Kubernetes supports several container runtimes: <a href="http://www.docker.com/" target="_blank" rel="noopener">Docker</a>, <a href="https://containerd.io/" target="_blank" rel="noopener">containerd</a>, <a href="https://cri-o.io/" target="_blank" rel="noopener">cri-o</a>, <a href="https://github.com/kubernetes-incubator/rktlet" target="_blank" rel="noopener">rktlet</a>, etc.</p>
-</li>
-</ul>
-<h3 id="3-Ymal"><a href="#3-Ymal" class="headerlink" title="3. Ymal"></a>3. Ymal</h3><p>Command to manipulate pods:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pods        						#Get existing pods</span><br><span class="line">kubectl create -f pod-definition.ymal			#create pods</span><br><span class="line">kubectl delete deployment &lt;deployment name&gt;     # delete pods</span><br></pre></td></tr></table></figure>
+    <section class="markdown-content"><h5 id="Q1-How-many-PODs-on-the-system-under-the-default-namespace？"><a href="#Q1-How-many-PODs-on-the-system-under-the-default-namespace？" class="headerlink" title="Q1. How many PODs on  the system under the default namespace？"></a>Q1. How many PODs on  the system under the default namespace？</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pods</span><br></pre></td></tr></table></figure>
 
+<p><img src="/2019/09/27/k8sCommand/getPods.png" alt="get"></p>
+<h5 id="Q2-Create-a-new-pod-with-the-NGINX-image"><a href="#Q2-Create-a-new-pod-with-the-NGINX-image" class="headerlink" title="Q2. Create a new pod with the NGINX image."></a>Q2. Create a new pod with the NGINX image.</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl run nginx --image-nginx</span><br></pre></td></tr></table></figure>
+
+<h5 id="Q3-What-is-the-image-of-a-pod"><a href="#Q3-What-is-the-image-of-a-pod" class="headerlink" title="Q3. What is the image of a pod?"></a>Q3. What is the image of a pod?</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl describe pod podName</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/09/27/k8sCommand/describe.png" alt="describe"></p>
+<h5 id="Q4-Which-node-are-the-pods-placed-on"><a href="#Q4-Which-node-are-the-pods-placed-on" class="headerlink" title="Q4. Which node are the pods placed on?"></a>Q4. Which node are the pods placed on?</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pods -o wide</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/09/27/k8sCommand/wide.png" alt="wide"></p>
+<h5 id="Q5-How-many-containers-are-part-of-the-pod-“xxx”"><a href="#Q5-How-many-containers-are-part-of-the-pod-“xxx”" class="headerlink" title="Q5.  How many containers are part of the pod “xxx”?"></a>Q5.  How many containers are part of the pod “xxx”?</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pods</span><br></pre></td></tr></table></figure>
+
+<p>or</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl describe pod xxx</span><br></pre></td></tr></table></figure>
+
+<p>READY: running containers /total number of containers </p>
+<p><img src="/2019/09/27/k8sCommand/containers.png" alt="containers"></p>
+<h5 id="Q6-What-is-the-state-of-the-container-‘mm’-in-the-pod-‘xxx’"><a href="#Q6-What-is-the-state-of-the-container-‘mm’-in-the-pod-‘xxx’" class="headerlink" title="Q6. What is the state of the container ‘mm’ in the pod ‘xxx’?"></a>Q6. What is the state of the container ‘mm’ in the pod ‘xxx’?</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl describe pod xxx</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/09/27/k8sCommand/status.png" alt="status"></p>
+<h5 id="Q7-How-to-delete-a-pod"><a href="#Q7-How-to-delete-a-pod" class="headerlink" title="Q7. How to delete a pod?"></a>Q7. How to delete a pod?</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl delete pod podName</span><br></pre></td></tr></table></figure>
+
+<h5 id="Q8-Create-a-new-pod-with-the-name-‘redis’-and-with-the-image-‘redis123’"><a href="#Q8-Create-a-new-pod-with-the-name-‘redis’-and-with-the-image-‘redis123’" class="headerlink" title="Q8. Create a new pod with the name ‘redis’ and with the image ‘redis123’."></a>Q8. Create a new pod with the name ‘redis’ and with the image ‘redis123’.</h5><p>cat &gt; redis-pod.ymal</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: Pod</span><br><span class="line">metadata:</span><br><span class="line">  name: myapp-pod</span><br><span class="line">  labels:</span><br><span class="line">    app: myapp</span><br><span class="line">spec:</span><br><span class="line">  containers:</span><br><span class="line">  - name: redis</span><br><span class="line">    image: redis123</span><br></pre></td></tr></table></figure>
+
+<p>run command</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl create -f redis-pod.ymal</span><br></pre></td></tr></table></figure>
+
+<p>describe pod</p>
+<p><img src="/2019/09/27/k8sCommand/error.png" alt="error"></p>
+<p><img src="/2019/09/27/k8sCommand/events.png" alt="error"></p>
+<h5 id="9-How-to-fix-the-error"><a href="#9-How-to-fix-the-error" class="headerlink" title="9. How to fix the error?"></a>9. How to fix the error?</h5><p>(1) Delete the pod and create a new one with correct image</p>
+<p>(2) Edit the pod</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl edit pod podName</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/09/27/k8sCommand/edit.png" alt="Edit"></p>
 </section>
     <!-- Tags START -->
     
@@ -207,20 +204,13 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2019/09/21/Docker/">
+      <a class="nav-left" href="/2019/09/22/k8sArchitecture/">
         <span class="nav-arrow">← </span>
         
-          Kubernetes(1)-Container
+          Kubernetes(2)-Architecture
         
       </a>
     
-    
-      <a class="nav-right" href="/2019/09/27/k8sCommand/">
-        
-          Kubernetes(3)-Pods Create and Configuration
-        
-        <span class="nav-arrow"> →</span>
-      </a>
     
   </div>
 
@@ -247,7 +237,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-Master"><span class="toc-nav-text">1. Master</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#ETCD-Cluster"><span class="toc-nav-text">ETCD Cluster</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#Kube-scheduler"><span class="toc-nav-text">Kube-scheduler</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#Kube-Controller-Manager"><span class="toc-nav-text">Kube-Controller-Manager</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#Kube-apiserver"><span class="toc-nav-text">Kube-apiserver</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-Worker-Nodes"><span class="toc-nav-text">2. Worker Nodes</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#Kubelete"><span class="toc-nav-text">Kubelete</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#Kube-proxy"><span class="toc-nav-text">Kube-proxy</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#Container-Runtime"><span class="toc-nav-text">Container Runtime</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-Ymal"><span class="toc-nav-text">3. Ymal</span></a></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#Q1-How-many-PODs-on-the-system-under-the-default-namespace？"><span class="toc-nav-text">Q1. How many PODs on  the system under the default namespace？</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#Q2-Create-a-new-pod-with-the-NGINX-image"><span class="toc-nav-text">Q2. Create a new pod with the NGINX image.</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#Q3-What-is-the-image-of-a-pod"><span class="toc-nav-text">Q3. What is the image of a pod?</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#Q4-Which-node-are-the-pods-placed-on"><span class="toc-nav-text">Q4. Which node are the pods placed on?</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#Q5-How-many-containers-are-part-of-the-pod-“xxx”"><span class="toc-nav-text">Q5.  How many containers are part of the pod “xxx”?</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#Q6-What-is-the-state-of-the-container-‘mm’-in-the-pod-‘xxx’"><span class="toc-nav-text">Q6. What is the state of the container ‘mm’ in the pod ‘xxx’?</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#Q7-How-to-delete-a-pod"><span class="toc-nav-text">Q7. How to delete a pod?</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#Q8-Create-a-new-pod-with-the-name-‘redis’-and-with-the-image-‘redis123’"><span class="toc-nav-text">Q8. Create a new pod with the name ‘redis’ and with the image ‘redis123’.</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#9-How-to-fix-the-error"><span class="toc-nav-text">9. How to fix the error?</span></a></li></ol>
     
   </div>
 </aside>
@@ -257,7 +247,7 @@
 
 <script>
   (function () {
-    var url = 'http://yoursite.com/2019/09/22/k8sArchitecture/';
+    var url = 'http://yoursite.com/2019/09/27/k8sCommand/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
